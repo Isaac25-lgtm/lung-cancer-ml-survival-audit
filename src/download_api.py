@@ -15,6 +15,7 @@ is hashed and its release identifier recorded in the manifest.
 from __future__ import annotations
 
 import json
+import time
 
 import pandas as pd
 import requests
@@ -52,10 +53,22 @@ def gdc_cases(ids: list[str]) -> list[dict]:
             "format": "JSON",
             "size": 1000,
         }
-        r = requests.post(f"{GDC}/cases", json=body, timeout=180, headers={"User-Agent": USER_AGENT})
-        r.raise_for_status()
-        hits.extend(r.json()["data"]["hits"])
+        hits.extend(_post_with_retries(f"{GDC}/cases", body)["data"]["hits"])
     return hits
+
+
+def _post_with_retries(url: str, body: dict, retries: int = 5, timeout: int = 60) -> dict:
+    last = None
+    for i in range(retries):
+        try:
+            r = requests.post(url, json=body, timeout=timeout, headers={"User-Agent": USER_AGENT})
+            if r.status_code == 200:
+                return r.json()
+            last = RuntimeError(f"HTTP {r.status_code} for {url}")
+        except requests.RequestException as e:  # network hiccup
+            last = e
+        time.sleep(5 * 2 ** i)
+    raise RuntimeError(f"Failed to POST {url} after {retries} attempts: {last}")
 
 
 def run(manifest: dict, force: bool = False) -> None:
