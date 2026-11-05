@@ -15,7 +15,7 @@ REQUIRED = [
     "discordance_summary", "label_agreement", "rule_reproduction", "source_manifest", "linkage_summary",
     "death_time_agreement", "release_reconciliation", "km_365", "km_curves", "unknown_reasons",
     "fig2_death_time_histogram", "exp_a_metrics", "exp_a_paired_deltas", "exp_a2_transport",
-    "exp_a_model_ranking", "exp_a_cohort_mechanism", "exp_b_benchmark_folds", "fold_provenance", "exp_b_summary", "exp_b_paired", "exp_sensitivity", "exp_c_censoring", "exp_d_leakage",
+    "exp_a_model_ranking", "exp_a_cohort_mechanism", "exp_a_auroc_decomposition", "exp_b_benchmark_folds", "fold_provenance", "exp_b_summary", "exp_b_paired", "exp_sensitivity", "exp_c_censoring", "exp_d_leakage",
     "falsification_checks", "dss_audit", "i3lung_label_audit", "literature_register",
 ]
 

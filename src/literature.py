@@ -31,7 +31,7 @@ ROWS = [
                        "A Reproducible Censoring-Aware Reanalysis",
          authors="Tadj et al.", year=2026, type="Journal article, BioMedInformatics 6(4):60 (2026-08-14)",
          url="https://doi.org/10.3390/biomedinformatics6040060",
-         population="Breast cancer (full text not reviewed in this run)", outcome="Prognosis, censoring-aware",
+         population="Breast cancer (publisher blocked automated retrieval and no Europe PMC record was found; full text not reviewed)", outcome="Prognosis, censoring-aware",
          methods="Leakage and temporal-misalignment audit", main_result="Metadata verified via Crossref only",
          relation="Closest generic methodological audit, different cancer.",
          our_critique="Our contribution differs: deterministic source-linked reconstruction of how a released benchmark "

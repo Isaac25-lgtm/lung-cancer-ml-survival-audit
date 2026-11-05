@@ -477,6 +477,31 @@ def cohort_mechanism(L, folds, scores):
     return pd.DataFrame(rows)
 
 
+def auroc_decomposition(L, scores, model="logistic"):
+    """POST-HOC. Pooled AUROC is a pair-weighted average of case-control concordance. Splitting
+    the pairs by the cohorts of the case and the control shows where a label set changes AUROC.
+    Pooled over folds (fold-averaged AUROC cannot be decomposed this way)."""
+    k = L.y_gdc_gt.notna().to_numpy()
+    s_ = scores[model][0][k]
+    coh = L.cohort.to_numpy()[k]
+    rows = []
+    for label, col in [("released", "y_released_death"), ("source", "y_gdc_gt")]:
+        y = L[col].to_numpy(float)[k]
+        total = (y == 1).sum() * (y == 0).sum()
+        check = 0.0
+        for a in ["TCGA", "CPTAC"]:
+            for b in ["TCGA", "CPTAC"]:
+                sc, sn = s_[(y == 1) & (coh == a)], s_[(y == 0) & (coh == b)]
+                c = M.auroc(np.r_[np.ones(len(sc)), np.zeros(len(sn))], np.r_[sc, sn])
+                share = len(sc) * len(sn) / total
+                check += share * c
+                rows.append({"model": model, "label_set": label, "case_cohort": a, "control_cohort": b,
+                             "cases": len(sc), "controls": len(sn), "pair_share": share, "concordance": c,
+                             "contribution": share * c})
+        assert abs(check - M.auroc(y, s_)) < 1e-9, "decomposition must sum to pooled AUROC"
+    return pd.DataFrame(rows)
+
+
 def run(n_repeats_b: int = 50) -> dict:
     t0 = time.time()
     TABLES.mkdir(parents=True, exist_ok=True)
@@ -488,6 +513,8 @@ def run(n_repeats_b: int = 50) -> dict:
     model_ranking(L, scores).to_csv(TABLES / "exp_a_model_ranking.csv", index=False)
     training_effect_benchmark_folds(L, folds, scores).to_csv(TABLES / "exp_b_benchmark_folds.csv", index=False)
     cohort_mechanism(L, folds, scores).to_csv(TABLES / "exp_a_cohort_mechanism.csv", index=False)
+    pd.concat([auroc_decomposition(L, scores, m) for m in ["logistic", "stage_only"]]).to_csv(
+        TABLES / "exp_a_auroc_decomposition.csv", index=False)
     print(f"A done {time.time() - t0:.0f}s")
     A2 = experiment_a2(L)
     A2.to_csv(TABLES / "exp_a2_transport.csv", index=False)

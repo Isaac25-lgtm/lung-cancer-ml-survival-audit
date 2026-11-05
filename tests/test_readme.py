@@ -73,10 +73,60 @@ def test_negative_control_numbers():
 
 
 def test_local_links_and_images_exist():
-    for target in re.findall(r"\]\((?!https?://)([^)#\s]+)", README):
+    for target in re.findall(r"\]\((?!https?://|mailto:)([^)#\s]+)", README):
         assert (ROOT / target).exists(), f"broken README link: {target}"
 
 
 def test_images_have_alt_text():
     for alt, _ in re.findall(r"!\[([^\]]*)\]\((?!https?://)([^)]+)\)", README):
         assert len(alt) > 30, f"image needs descriptive alt text: {alt!r}"
+
+
+def test_decomposition_numbers():
+    d = pd.read_csv(TABLES / "exp_a_auroc_decomposition.csv")
+    for model, gap_text, share_text in [("logistic", "\u22120.034", "78%"), ("stage_only", "+0.024", "94%")]:
+        x = d[d.model == model]
+        a, b = x[x.label_set == "released"].reset_index(drop=True), x[x.label_set == "source"].reset_index(drop=True)
+        gap = (b.contribution - a.contribution).sum()
+        comp = ((b.pair_share - a.pair_share) * (b.concordance + a.concordance) / 2).sum()
+        conc = ((b.concordance - a.concordance) * (b.pair_share + a.pair_share) / 2).sum()
+        assert abs(comp + conc - gap) < 1e-12
+        assert gap_text == _minus(gap) and share_text in README
+        share = comp / gap if model == "logistic" else conc / gap
+        assert f"{share:.0%}" == share_text
+    x = d[(d.model == "logistic") & (d.case_cohort == "CPTAC") & (d.control_cohort == "TCGA")].set_index("label_set")
+    assert f"**{x.at['released', 'pair_share']:.1%}** | **{x.at['released', 'concordance']:.3f}**" in README
+    assert f"**{x.at['source', 'pair_share']:.1%}** | **{x.at['source', 'concordance']:.3f}**" in README
+
+
+def test_calibration_and_experiment_numbers():
+    a = pd.read_csv(TABLES / "exp_a_metrics.csv")
+    a = a[(a.cohort == "All") & a.evaluation.str.startswith("source")].set_index("model")
+    assert f"calibration slope {a.at['logistic', 'cal_slope']:.2f}" in README
+    assert f"scaled Brier score {_minus(a.at['logistic', 'scaled_brier_pooled'])}" in README
+    assert f"slope {a.at['stage_only', 'cal_slope']:.2f}" in README
+    assert f"scaled Brier score {_minus(a.at['stage_only', 'scaled_brier_pooled'])}" in README
+    t = pd.read_csv(TABLES / "exp_a2_transport.csv")
+    r = t[(t.model == "logistic") & t.test.str.contains("GDC")].iloc[0]
+    assert f"{r.auroc_delta:+.3f} ({r.auroc_delta_ci_lo:+.3f} to {r.auroc_delta_ci_hi:+.3f})" in README
+    c = pd.read_csv(TABLES / "exp_c_censoring.csv")
+    c = c[c.scores == "logistic trained on source-derived labels"]
+    b = c[c.method.str.startswith("sharp")].iloc[0]
+    assert f"{b.auroc_lo:.3f}\u2013{b.auroc_hi:.3f}" in README
+    assert f"{c[c.method.str.startswith('complete')].auroc.iloc[0]:.3f}" in README
+    d = pd.read_csv(TABLES / "exp_d_leakage.csv")
+    d = d[d.model == "logistic"]
+    assert f"{d[d.features.str.contains('dss')].auroc_released_all_foldavg.iloc[0]:.3f}" in README
+    assert f"{d[d.features.str.contains('last_fup')].auroc_released_all_foldavg.iloc[0]:.3f}" in README
+
+
+def test_every_reference_is_cited_and_defined():
+    cited = set(re.findall(r"\[\[(\d+)\]\]\(#ref-\1\)", README))
+    defined = set(re.findall(r'<a id="ref-(\d+)"></a>', README))
+    assert cited == defined, f"cited but undefined: {cited - defined}; defined but uncited: {defined - cited}"
+    assert defined == {str(i) for i in range(1, len(defined) + 1)}
+
+
+def test_author_details_present():
+    assert "Omoding Isaac" in README and "omodingisaac111@gmail.com" in README
+    assert "Isaac Omoding" not in README

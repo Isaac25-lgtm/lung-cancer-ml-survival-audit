@@ -30,3 +30,4 @@ All dates are 2026-11-05 unless stated otherwise.
    - `exp_b_benchmark_folds.csv`: patient-level paired bootstrap of the training-label effect in the released folds, because Experiment B's repeat ranges reflect split variability only.
    - `exp_a_model_ranking.csv`: model-gap interaction, added after noticing that point-estimate rankings changed between label sets.
 10. **Figure 7 caption corrected.** A draft claimed the score distribution showed the model had learned the inversion. It does not, and the caption now says so.
+11. **Post-hoc AUROC decomposition added** (`exp_a_auroc_decomposition.csv`): pooled AUROC split into within-cohort and between-cohort case-control pairs, to test the proposed mechanism directly. Added after seeing the results.
