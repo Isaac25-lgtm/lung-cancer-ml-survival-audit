@@ -1,0 +1,52 @@
+# Pinned public data sources. Raw bytes are downloaded to data/raw/ (gitignored).
+# Each file's SHA-256, size, HTTP status and retrieval time are written to
+# data/raw/MANIFEST.json by `python -m src.download_data`.
+#
+# Redistribution: none of these raw files are committed to git. MMIST-LUNG has no
+# licence file in its repository (checked 2026-11-05), so we treat its contents as
+# "all rights reserved" for redistribution purposes and only publish aggregates.
+
+mmist:
+  repo: ritacmendes/MMIST-LUNG
+  # Pinned commit (HEAD of master on 2026-11-05; commit date 2026-09-17).
+  commit: 430670cebcbfa26fbb80a5812dc55e3e6c7da3ed
+  base_url: https://raw.githubusercontent.com/ritacmendes/MMIST-LUNG/{commit}/{path}
+  files:
+    - README.md
+    - Real-World Multi-Modal and Longitudinal Lung Cancer Dataset.pdf
+    - features/demographics.csv
+    - features/diagnosis.csv
+    - features/all-followups.csv
+    - features/filtered-followups.csv
+    - features/surgery.csv
+    - features/chemotherapy.csv
+    - features/radiation.csv
+    - features/immunotherapy.csv
+    - folds.npy
+    - encode-csv.ipynb
+    - benchmark-code/README.md
+    - benchmark-code/config.yaml
+    - benchmark-code/config-gastric.yaml
+    - benchmark-code/PatientDataset.py
+    - benchmark-code/main.py
+    - benchmark-code/utils.py
+    - benchmark-code/collate.py
+    - benchmark-code/train-optuna.py
+    - benchmark-code/MLP-test-results.ipynb
+    - benchmark-code/XGB-feature-importance.ipynb
+  # Documented benchmark-file hashes from the feasibility handover (comparators only).
+  handover_sha256:
+    features/demographics.csv: 4931667f1e8497862ec27d8e872bfa1fdc1acf6674842e57bbb1a79a3ecc359b
+    features/diagnosis.csv: eee4614fc2a6bdec13bc450af672e74b8f856f13dab74d6a5c30738210ba1165
+    features/all-followups.csv: cfaa5887f3c1ba83d6cfb4862bd60fd0f0ee177f52e9009c04f51e73a4300f40
+    benchmark-code/config.yaml: 0106c5691c54cf01713f78d73ff5d690b0f249fbb7810576cbde72e745a07adb
+    benchmark-code/PatientDataset.py: 6755c4ba0f5e8035843ba973f6fb7ad3d20bb181c579ac53dae57af078081f6e
+
+linkedomics_cptac:
+  # LinkedOmics / Zhang Lab CPTAC pan-cancer data freeze v1.2 (2023).
+  base_url: https://cptac-pancancer-data.s3.us-west-2.amazonaws.com/data_freeze_v1.2_reorganized/{path}
+  files:
+    - LUAD/LUAD_survival.txt
+    - LUAD/LUAD_meta.txt
+    - LSCC/LSCC_survival.txt
+    - LSCC/LSCC_meta.txt

@@ -1,0 +1,75 @@
+# Machine-readable analysis protocol. Human-readable version: docs/protocol.md
+# Version 1.0 - frozen 2026-11-05 before any model in src/experiments.py was fitted.
+# Already seen before freezing (NOT blind): the feasibility handover results,
+# the released-label generating rules, and the GDC/MMIST death-time agreement.
+
+# v1.1 (2026-11-05): released folds now applied in the order they were generated; see docs/changelog.md item 8.
+protocol_version: "1.1"
+frozen_date: "2026-11-05"
+
+population: all MMIST-LUNG patients at pinned commit 430670ce (n=1365)
+index_date: diagnosis (GDC index_date); 2 CPTAC cases indexed at sample procurement are flagged and excluded in a sensitivity analysis
+horizon_days: 365
+
+outcome:
+  coding: "y_death = 1 if death on or before the horizon, 0 if known alive beyond horizon, NA if not ascertainable"
+  primary_convention: gt      # alive class requires survival time > 365 days (death on day 365 = early death)
+  sensitivity_conventions: [ge]  # death on day 365 counted as survivor
+  primary_source: gdc         # GDC Data Release 46.0 (direct upstream of MMIST clinical export)
+  sensitivity_sources: [cdr_linkedomics, consensus, mmist_fields]
+  rules:
+    death_valid: "vital_status == Dead and days_to_death >= 0"
+    known_early_death: "death_valid and days_to_death <= 365 (gt) / < 365 (ge)"
+    known_alive: "(death_valid and days_to_death > 365 (gt) / >= 365 (ge)) or (not Dead and last_contact >= 365)"
+    unknown: "everything else, including Dead without a date and negative times"
+  last_contact: "max(diagnoses.days_to_last_follow_up, follow_ups.days_to_follow_up)"
+
+released_label: "vital_status_12 (1 = reported alive at 12 months); analysed as y_released_death = 1 - vital_status_12"
+
+features:
+  clin: [diagnoses.age_bin, demographic.ethnicity, demographic.gender, demographic.race,
+         exposures.pack_years_smoked, exposures.tobacco_smoking_status, exposures.tobacco_years_smoked,
+         diagnoses.ajcc_pathologic_m, diagnoses.ajcc_pathologic_n, diagnoses.ajcc_pathologic_stage,
+         diagnoses.ajcc_pathologic_t, diagnoses.ajcc_staging_system_edition, diagnoses.icd_10_code,
+         diagnoses.morphology, diagnoses.prior_malignancy]
+  stage_only: [diagnoses.ajcc_pathologic_stage]
+  forbidden: [demographic.days_to_death, days_to_last_fup, vital_status_12, vital_status_dss]
+
+models:
+  prevalence: training-fold prevalence of y_death
+  logistic: "L2 logistic regression, C=1.0, ordinal features scaled + missing indicators, nominal one-hot; fit within training folds only"
+  hgb: "HistGradientBoostingClassifier(max_iter=200, learning_rate=0.05, max_leaf_nodes=15, min_samples_leaf=20, l2_regularization=1.0, random_state=437); XGBoost analogue"
+  stage_only_logistic: "logistic on one-hot pathological stage"
+
+splits:
+  benchmark: "released folds.npy (5 folds) applied in generation order: sorted TCGA, then CPTAC in diagnosis.csv order (reproduces the file exactly)"
+  benchmark_sensitivity: "released fold indices applied in ascending submitter_id order (the order used by released PatientDataset.py)"
+  repeated_cv: "50 repeats x 5-fold, stratified on cohort x outcome state, seeds 1000..1049"
+  transport: "train TCGA, test CPTAC"
+
+primary_contrast:
+  experiment: A
+  description: >
+    Logistic regression trained on released labels in the released benchmark folds (as the
+    benchmark does). Out-of-fold scores held fixed. On patients whose GDC-derived 365-day status
+    is ascertainable, compare AUROC computed against source-derived vs released labels.
+  estimand: "dAUROC = AUROC(scores, y_source) - AUROC(scores, y_released) on identical patients"
+  metric: fold-averaged AUROC
+  uncertainty: "2000-replicate bootstrap over patients stratified by fold x cohort, conditional on fitted scores; seed 20261105"
+
+secondary:
+  - "Brier, balanced accuracy (threshold = training prevalence), AUPRC, calibration intercept/slope on the same contrast"
+  - "Benchmark-as-published setting: AUROC/BAcc against released labels on all 1365"
+  - "Experiment A2: TCGA->CPTAC transport, fixed scores, released vs source labels"
+  - "Experiment B: training on released vs source labels, evaluated on source labels"
+  - "Experiment C: IPCW AUROC/Brier at 365 days, sharp partial-identification bounds, Harrell C-index"
+  - "Experiment D: controlled leakage negative control (post-outcome fields added)"
+  - "Sensitivity: >= convention, alternative sources, excluding version-changed and non-diagnosis-index cases"
+
+falsification:
+  - "label permutation null for AUROC"
+  - "prevalence model AUROC == 0.5"
+  - "flipping CPTAC recorded-death labels reproduces source labels among deaths"
+
+bootstrap_reps: 2000
+seed: 20261105

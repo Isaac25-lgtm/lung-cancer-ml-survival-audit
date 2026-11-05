@@ -1,0 +1,15 @@
+# Raw and patient-level data are never committed (MMIST-LUNG has no licence;
+# GDC/CPTAC/I3LUNG reuse terms favour pointing to sources over redistribution).
+data/raw/
+data/interim/
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+# environments / caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+.streamlit/secrets.toml
+*.log
+.DS_Store

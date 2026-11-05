@@ -1,0 +1,16 @@
+[project]
+name = "lung-cancer-ml-survival-audit"
+version = "1.0.0"
+description = "Source-linked audit of 12-month survival labels in the MMIST-LUNG benchmark and their effect on ML evaluation"
+requires-python = ">=3.11,<3.13"
+license = { text = "MIT (code only; see LICENSE_OR_REUSE_NOTES.md for data)" }
+dependencies = [
+  "numpy==2.2.5", "pandas==2.2.3", "scikit-learn==1.6.1", "scipy==1.16.1",
+  "statsmodels==0.14.5", "matplotlib==3.10.5", "plotly==5.24.1", "streamlit==1.46.1",
+  "pyyaml==6.0.2", "requests==2.32.3", "openpyxl==3.1.5", "pytest==8.3.4",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]
