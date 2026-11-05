@@ -37,7 +37,7 @@ def main(argv=None) -> None:
         from src import download_data
         download_data.main([])
     from src import (audit_labels, experiments, fold_provenance, i3lung, link_sources, literature,
-                     make_figures, reproduce_handover)
+                     make_figures, make_story_figures, reproduce_handover)
     rep = reproduce_handover.run()
     n_ok = int(rep.match.sum())
     print(f"[gate] handover reproduction {n_ok}/{len(rep)}")
@@ -55,6 +55,7 @@ def main(argv=None) -> None:
         print("[i3lung] bundle not available; skipped")
     literature.run()
     make_figures.run()
+    make_story_figures.run()
 
     res["run_utc"] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
     res["git_commit"] = _git_commit()

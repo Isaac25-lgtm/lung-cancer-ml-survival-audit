@@ -64,7 +64,7 @@ The CPTAC rule assigns the survivor label to patients who **died within a year**
   - TCGA "Dead" without a death date: 9
   - alive with no follow-up time: 6
   - negative death time: 1
-- **The overall survival rate looks right only because errors offset.** Kaplan–Meier 12-month overall survival is 86.8% (84.7–88.6), close to the released 85.6%. By subgroup, CPTAC is 90.5% by KM versus 81.7% released, and CPTAC LUSC is 93.5% versus 76.2%.
+- **The overall survival rate looks right only because errors offset.** Kaplan–Meier 12-month overall survival is 86.8% (84.7–88.5), close to the released 85.6%. By subgroup, CPTAC is 90.5% by KM versus 81.7% released, and CPTAC LUSC is 93.5% versus 76.2%.
 - **The handover's "10 contradictions" are resolved.** All 10 CPTAC patients censored at day 365 or later in LinkedOmics have a later death in MMIST/GDC, so their 365-day status agrees. This is a follow-up update, not a record error.
 - **The DSS label is also affected.** MMIST's `vital_status_dss` equals 1 for every CPTAC patient, including the 42 whose GDC cause of death is "Cancer Related". CPTAC therefore contributes no disease-specific events to the benchmark's DSS task. In TCGA, the DSS label agrees with TCGA-CDR for 202 of 207 DSS events.
 
