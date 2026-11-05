@@ -112,3 +112,39 @@ def test_fast_auroc_matches_sklearn(seed):
     y = rng.integers(0, 2, 500)
     s = np.round(rng.random(500), 2)  # many ties
     assert M.auroc(y, s) == pytest.approx(roc_auc_score(y, s), abs=1e-12)
+
+
+def test_ipcw_day365_boundary_matches_outcome_derivation():
+    """Reviewer-reported inconsistency: alive at last contact on day 365 must be a known
+    survivor in BOTH the outcome derivation and the IPCW labels (and carry weight > 0)."""
+    from src.derive_outcomes import status_at_horizon
+    t = np.array([365.0, 200.0, 500.0, 100.0, 365.0])
+    e = np.array([0.0, 1.0, 0.0, 0.0, 1.0])
+    derived = status_at_horizon(np.where(e == 1, t, np.nan), e == 1, np.where(e == 0, t, np.nan))
+    y, w = M.ipcw_weights(t, e, 365)
+    np.testing.assert_array_equal(np.nan_to_num(derived, nan=-1), np.nan_to_num(y, nan=-1))
+    assert y[0] == 0 and w[0] > 0          # censored exactly at 365 -> survivor
+    assert y[4] == 1                         # death exactly at 365 -> early death
+    assert np.isnan(y[3]) and w[3] == 0      # censored before 365 -> unknown, weight 0
+
+
+@pytest.mark.parametrize("seed", range(5))
+def test_ipcw_labels_agree_with_derivation_randomly(seed):
+    from src.derive_outcomes import status_at_horizon
+    rng = np.random.default_rng(seed)
+    t = rng.integers(0, 900, 400).astype(float)
+    t[rng.random(400) < 0.1] = 365.0
+    e = (rng.random(400) < 0.4).astype(float)
+    derived = status_at_horizon(np.where(e == 1, t, np.nan), e == 1, np.where(e == 0, t, np.nan))
+    y, _ = M.ipcw_weights(t, e, 365)
+    np.testing.assert_array_equal(np.nan_to_num(derived, nan=-1), np.nan_to_num(y, nan=-1))
+
+
+def test_ipcw_brier_denominator_excludes_unusable_times():
+    t = np.array([100, 400, np.nan, 500.0])
+    e = np.array([1, 0, np.nan, 1.0])
+    y, w = M.ipcw_weights(t, e, 365)
+    assert np.isnan(w[2])
+    s = np.array([0.5, 0.5, 0.5, 0.5])
+    b = M.weighted_brier(y, s, w)
+    assert b == pytest.approx(np.nansum(np.where(w > 0, w * (y - s) ** 2, 0)) / 3)

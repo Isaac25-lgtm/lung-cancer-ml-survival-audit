@@ -109,32 +109,37 @@ def ci(x: np.ndarray, alpha: float = 0.05) -> tuple[float, float]:
 def ipcw_weights(time, event, horizon: float, strata=None) -> tuple[np.ndarray, np.ndarray]:
     """IPCW weights for a fixed-horizon binary outcome.
 
-    cases    (event, T <= h): w = 1 / G(T-)
-    controls (T > h):          w = 1 / G(h)
-    censored before h:        w = 0
+    Boundary and tie convention (identical to derive_outcomes.status_at_horizon, 'gt'):
+    a death on day h is a case; a patient censored on day h is KNOWN to survive past h
+    (censoring is taken to occur after any death on the same day), so is a control.
+
+    cases    (event, T <= h):                 w = 1 / G(T-)
+    controls (T > h, or censored at T >= h):  w = 1 / G(h-) = 1 / P(C >= h)
+    censored before h:                        w = 0
     G is reverse Kaplan-Meier, optionally estimated separately within strata.
-    Returns (y, w) where y is 1 for cases, 0 for controls, NaN otherwise.
+    Returns (y, w): y is 1 for cases, 0 for controls, NaN otherwise. Patients with no
+    usable time get y = NaN and w = NaN, so they can be excluded from denominators.
     """
     time = np.asarray(time, float)
     event = np.asarray(event, float)
     n = len(time)
     strata = np.zeros(n, dtype=int) if strata is None else np.asarray(strata)
     y = np.full(n, np.nan)
-    w = np.zeros(n)
+    w = np.full(n, np.nan)
     for g in np.unique(strata):
-        m = (strata == g) & ~np.isnan(time)
+        m = (strata == g) & ~np.isnan(time) & ~np.isnan(event)
         G = km_censoring(time[m], event[m])
         ti, ei = time[m], event[m]
         yi = np.full(m.sum(), np.nan)
         wi = np.zeros(m.sum())
         case = (ei == 1) & (ti <= horizon)
-        ctrl = ti > horizon
+        ctrl = (ti > horizon) | ((ei == 0) & (ti >= horizon))
         yi[case] = 1
         yi[ctrl] = 0
         if case.any():
             wi[case] = 1 / G(ti[case], left=True)
         if ctrl.any():
-            wi[ctrl] = 1 / G(np.array([horizon]))[0]
+            wi[ctrl] = 1 / G(np.array([horizon]), left=True)[0]
         y[m], w[m] = yi, wi
     return y, w
 
@@ -158,11 +163,16 @@ def weighted_auroc(y, s, w) -> float:
 
 
 def weighted_brier(y, s, w) -> float:
+    """IPCW Brier score at the horizon (Graf et al.).
+
+    Target population: patients with a usable time-to-event record (w not NaN). Those
+    censored before the horizon carry weight 0 and contribute no error, but remain in
+    the denominator, because their weight is redistributed to observed patients through
+    1/G. Patients with no usable time (w NaN) are outside the target population."""
     y, s, w = (np.asarray(a, float) for a in (y, s, w))
-    ok = ~np.isnan(y) & ~np.isnan(s) & (w > 0)
-    # IPCW Brier (Graf): average over ALL patients with weights; censored-before-h contribute 0
-    n_all = np.sum(~np.isnan(s))
-    return float(np.sum(w[ok] * (y[ok] - s[ok]) ** 2) / n_all)
+    usable = ~np.isnan(w) & ~np.isnan(s)
+    ok = usable & ~np.isnan(y) & (w > 0)
+    return float(np.sum(w[ok] * (y[ok] - s[ok]) ** 2) / usable.sum())
 
 
 def auroc_bounds(y, s) -> tuple[float, float]:
