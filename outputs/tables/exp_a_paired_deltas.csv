@@ -1,0 +1,13 @@
+analysis,source,model,metric,contrast,n,events_source,events_released,value_source,value_released,delta,ci_lo,ci_hi,reps
+primary,y_gdc_gt,logistic,AUROC,"source - released (same patients, same scores)",1154,160,196,0.6002002906602085,0.6343606474079976,-0.034160356747789056,-0.06809038966993904,-0.002785557782298604,2000
+primary,y_gdc_gt,logistic,Brier,"source - released (same patients, same scores)",1154,160,196,0.12109048863005598,0.13773399688501492,-0.016643508254958944,-0.026569341942337277,-0.006939533181269424,2000
+primary,y_gdc_gt,logistic,Balanced accuracy,"source - released (same patients, same scores)",1154,160,196,0.5809762369748854,0.5935034602262659,-0.012527223251380448,-0.042665621071045975,0.016560428782851678,2000
+primary,y_gdc_gt,hgb,AUROC,"source - released (same patients, same scores)",1154,160,196,0.6035170980873111,0.6242473917739613,-0.020730293686650136,-0.054509180786501354,0.013377727432022046,2000
+primary,y_gdc_gt,hgb,Brier,"source - released (same patients, same scores)",1154,160,196,0.12781336143094882,0.14674380104379492,-0.0189304396128461,-0.029915348016253868,-0.008533579927262194,2000
+primary,y_gdc_gt,hgb,Balanced accuracy,"source - released (same patients, same scores)",1154,160,196,0.5758449329594054,0.5766015975553713,-0.0007566645959659057,-0.031199390406026366,0.030806140336042367,2000
+primary,y_gdc_gt,stage_only,AUROC,"source - released (same patients, same scores)",1154,160,196,0.6349710294380241,0.6087697627442126,0.02620126669381151,-0.01109279684062669,0.06321750882267262,2000
+primary,y_gdc_gt,stage_only,Brier,"source - released (same patients, same scores)",1154,160,196,0.11628111821440053,0.13890041814841123,-0.022619299934010698,-0.033789185531963056,-0.011810185385061716,2000
+primary,y_gdc_gt,stage_only,Balanced accuracy,"source - released (same patients, same scores)",1154,160,196,0.6007867432931275,0.5819263719991532,0.018860371293974332,-0.009739672981189787,0.048060941040154244,2000
+primary,y_gdc_gt,prevalence,AUROC,"source - released (same patients, same scores)",1154,160,196,0.5,0.5,0.0,0.0,0.0,2000
+primary,y_gdc_gt,prevalence,Brier,"source - released (same patients, same scores)",1154,160,196,0.11947838035933256,0.14180931652019618,-0.022330936160863624,-0.033533502964867526,-0.011504303820281314,2000
+primary,y_gdc_gt,prevalence,Balanced accuracy,"source - released (same patients, same scores)",1154,160,196,0.5,0.5,0.0,0.0,0.0,2000

@@ -1,0 +1,35 @@
+{
+  "protocol_version": "1.1",
+  "primary_contrast": {
+    "analysis": "primary",
+    "source": "y_gdc_gt",
+    "model": "logistic",
+    "metric": "AUROC",
+    "contrast": "source - released (same patients, same scores)",
+    "n": 1154,
+    "events_source": 160,
+    "events_released": 196,
+    "value_source": 0.6002002906602085,
+    "value_released": 0.6343606474079976,
+    "delta": -0.034160356747789056,
+    "ci_lo": -0.06809038966993904,
+    "ci_hi": -0.002785557782298604,
+    "reps": 2000
+  },
+  "ipcw_diagnostics": {
+    "ipcw_label_agreement_with_derived_status": 1.0,
+    "ipcw_max_weight": 1.198762928270528,
+    "ipcw_mean_weight": 1.1456195355778445,
+    "ipcw_effective_n": 1151.8622937276632,
+    "ipcw_G365_TCGA": 0.8765332852083146,
+    "ipcw_G365_CPTAC": 0.8341932974543298
+  },
+  "runtime_s": 585.9,
+  "bootstrap_reps": 2000,
+  "seed": 20261105,
+  "repeats_experiment_b": 50,
+  "run_utc": "2026-11-05T17:52:36+00:00",
+  "git_commit": "47e9ec9",
+  "handover_reproduced": "35/35",
+  "gdc_release": "Data Release 46.0 - August 10, 2026"
+}

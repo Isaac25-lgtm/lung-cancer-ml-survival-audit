@@ -1,0 +1,12 @@
+cohort,category,n,mmist_vital_status_dss_0,mmist_vital_status_dss_1
+CPTAC,GDC cause_of_death = (no death),249,0,249
+CPTAC,GDC cause_of_death = Cancer Related,42,0,42
+CPTAC,"GDC cause_of_death = Cardiovascular Disorder, NOS",1,0,1
+CPTAC,GDC cause_of_death = Infection,2,0,2
+CPTAC,GDC cause_of_death = Not Cancer Related,7,0,7
+CPTAC,GDC cause_of_death = Not Reported,4,0,4
+CPTAC,GDC cause_of_death = Surgical Complications,1,0,1
+CPTAC,GDC cause_of_death = Unknown,33,0,33
+TCGA,TCGA-CDR DSS = NA,88,0,88
+TCGA,TCGA-CDR DSS = 0,731,0,731
+TCGA,TCGA-CDR DSS = 1,207,202,5

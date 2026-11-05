@@ -37,7 +37,7 @@ st.markdown("""
 
 def layout(fig: go.Figure, height: int = 360, title: str | None = None) -> go.Figure:
     fig.update_layout(height=height, margin=dict(l=10, r=10, t=40 if title else 10, b=10),
-                      title=dict(text=title, x=0, font=dict(size=14)) if title else None,
+                      title=dict(text=title or "", x=0, font=dict(size=14)),
                       plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
                       font=dict(family="system-ui, -apple-system, Segoe UI, sans-serif", size=12),
                       legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0),
@@ -59,7 +59,7 @@ st.markdown(
     '<span class="badge b-warn">Benchmark label audit</span>'
     '<span class="badge b-info">Source-linked: GDC Data Release 46.0</span>'
     '<span class="badge b-ok">Not a clinical tool</span>', unsafe_allow_html=True)
-st.caption(f"Run {R.get('run_utc', '?')} · code commit {R.get('git_commit', 'uncommitted')} · "
+st.caption(f"Run {str(R.get('run_utc', '?'))[:16].replace('T', ' ')} UTC · code commit {R.get('git_commit', 'uncommitted')} · "
            f"protocol v{R.get('protocol_version')} · aggregate tables only, no patient-level data")
 
 tabs = st.tabs(["Overview", "Provenance", "Label agreement", "Survival & censoring",
@@ -79,10 +79,10 @@ with tabs[0]:
     c1.metric("Patients in benchmark", f"{int(p.at['All', 'n']):,}")
     c2.metric("365-day status ascertainable", f"{int(p.at['All', 'known']):,}",
               help="Death on/before day 365 or known alive beyond day 365 in GDC DR46")
-    c3.metric("Released label inconsistent with source", f"{int(p.at['All', 'discordant'])}",
-              f"{p.at['All', 'discordant_pct']:.1f}% of ascertainable", delta_color="off")
-    c4.metric("Not ascertainable, released as survivor", f"{int(p.at['All', 'unknown_released_as_survivor'])}",
-              f"{100 * p.at['All', 'unknown'] / p.at['All', 'n']:.1f}% of all", delta_color="off")
+    c3.metric("Released label inconsistent with source", f"{int(p.at['All', 'discordant'])}")
+    c3.caption(f"{100 * p.at['All', 'discordant'] / p.at['All', 'known']:.1f}% of ascertainable patients")
+    c4.metric("Not ascertainable, released as survivor", f"{int(p.at['All', 'unknown_released_as_survivor'])}")
+    c4.caption(f"{100 * p.at['All', 'unknown'] / p.at['All', 'n']:.1f}% of all patients")
     st.markdown("#### What was asked")
     st.markdown(
         "In MMIST-LUNG, how do the released 12-month survival labels compare with outcomes derived from the "
@@ -133,13 +133,19 @@ with tabs[2]:
         xs = ["early death", "alive >365d", "unknown"]
         ys = ["released early death", "released survivor"]
         z = [[int(s.get((y, x), 0)) for x in xs] for y in ys]
-        colors = [[0, 1, 2], [1, 0, 2]]  # 0 consistent, 1 inconsistent, 2 unknown
+        kinds = [[0, 1, 2], [1, 0, 2]]  # 0 consistent, 1 inconsistent, 2 unknown, 3 empty cell
+        colors = [[3 if z[i][j] == 0 else kinds[i][j] for j in range(3)] for i in range(2)]
+        xl = ["Early death ≤365 d", "Alive >365 d", "Not ascertainable"]
+        yl = ["Released: early death", "Released: survivor"]
         fig = go.Figure(go.Heatmap(
-            z=colors, x=["Early death ≤365 d", "Alive >365 d", "Not ascertainable"],
-            y=["Released: early death", "Released: survivor"], text=z, texttemplate="%{text}",
-            textfont=dict(size=18, color="white"), showscale=False,
-            colorscale=[[0, BLUE], [0.33, BLUE], [0.34, RED], [0.66, RED], [0.67, GRAY], [1, GRAY]],
-            hovertemplate="%{y} · source: %{x}<br>%{text} patients<extra></extra>", xgap=3, ygap=3))
+            z=colors, x=xl, y=yl, customdata=z, showscale=False, zmin=0, zmax=3,
+            colorscale=[[0, BLUE], [0.25, BLUE], [0.25, RED], [0.5, RED], [0.5, GRAY], [0.75, GRAY],
+                        [0.75, LIGHT], [1, LIGHT]],
+            hovertemplate="%{y} · source: %{x}<br>%{customdata} patients<extra></extra>", xgap=3, ygap=3))
+        for i, row in enumerate(z):
+            for j, v in enumerate(row):
+                fig.add_annotation(x=xl[j], y=yl[i], text=str(v), showarrow=False,
+                                   font=dict(size=18, color="white" if v else "#52514e"))
         fig.update_yaxes(autorange="reversed")
         col.plotly_chart(layout(fig, 300, f"{cohort} (n={int(sum(map(sum, z)))})"), use_container_width=True)
     st.caption("Blue = consistent · Red = inconsistent · Gray = 365-day status not ascertainable from the source.")
@@ -147,9 +153,14 @@ with tabs[2]:
     d = d[d.source == src][["group", "n", "known", "discordant", "discordant_pct", "discordant_ci_lo",
                             "discordant_ci_hi", "unknown_released_as_survivor",
                             "released_sensitivity_for_early_death", "released_ppv_for_early_death"]]
-    d["discordant % (95% Wilson CI)"] = [fmt_ci(a, b, c) for a, b, c in zip(d.discordant_pct, d.discordant_ci_lo, d.discordant_ci_hi)]
-    st.dataframe(d.drop(columns=["discordant_pct", "discordant_ci_lo", "discordant_ci_hi"]),
-                 hide_index=True, use_container_width=True)
+    d["Inconsistent, % (95% CI)"] = [fmt_ci(100 * k / n if n else float("nan"), lo, hi) for k, n, lo, hi in
+                                     zip(d.discordant, d.known, d.discordant_ci_lo, d.discordant_ci_hi)]
+    d = d.drop(columns=["discordant_pct", "discordant_ci_lo", "discordant_ci_hi"]).rename(columns={
+        "group": "Group", "n": "Patients", "known": "Ascertainable", "discordant": "Inconsistent",
+        "unknown_released_as_survivor": "Unknown, released survivor",
+        "released_sensitivity_for_early_death": "Released label sensitivity",
+        "released_ppv_for_early_death": "Released label PPV"})
+    st.dataframe(d, hide_index=True, use_container_width=True)
     st.markdown("#### How the released labels were generated")
     st.dataframe(load_table("rule_reproduction"), hide_index=True, use_container_width=True)
     h = load_table("fig2_death_time_histogram")
@@ -217,7 +228,11 @@ with tabs[4]:
     ad["model"] = ad.model.map(names)
     ad["Δ (95% CI)"] = [f"{d:+.3f} ({lo:+.3f} to {hi:+.3f})" for d, lo, hi in zip(ad.delta, ad.ci_lo, ad.ci_hi)]
     st.dataframe(ad[["model", "metric", "n", "events_source", "events_released", "value_source",
-                     "value_released", "Δ (95% CI)"]], hide_index=True, use_container_width=True)
+                     "value_released", "Δ (95% CI)"]].rename(columns={
+                         "model": "Model", "metric": "Metric", "events_source": "Source events",
+                         "events_released": "Released events", "value_source": "Against source",
+                         "value_released": "Against released"}),
+                 hide_index=True, use_container_width=True)
     st.caption("Out-of-fold scores from the released benchmark folds, models trained on released labels. "
                "Intervals are conditional on the fitted scores (patients resampled, models not refitted).")
     st.markdown("#### Does the label set change which model looks best?")

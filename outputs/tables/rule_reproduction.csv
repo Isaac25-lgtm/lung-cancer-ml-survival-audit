@@ -1,0 +1,5 @@
+cohort,rule,n,agree,pct_agree
+CPTAC,TCGA rule: survivor if death >365d or no death,339,249,73.45
+CPTAC,Notebook rule (encode-csv cell 14): survivor if death <=365d or no death,339,339,100.0
+TCGA,TCGA rule: survivor if death >365d or no death,1026,1026,100.0
+TCGA,Notebook rule (encode-csv cell 14): survivor if death <=365d or no death,1026,627,61.11

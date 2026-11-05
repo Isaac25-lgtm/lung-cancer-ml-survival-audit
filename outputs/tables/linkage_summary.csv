@@ -1,0 +1,9 @@
+,value
+gdc_release,"Data Release 46.0 - August 10, 2026"
+n_mmist,1365
+n_gdc_matched,1365
+n_cdr_matched,1026
+n_cdr_lung_rows,1026
+n_linkedomics_matched,218
+n_linkedomics_rows,218
+cohort_prefix_equals_gdc_project,1365

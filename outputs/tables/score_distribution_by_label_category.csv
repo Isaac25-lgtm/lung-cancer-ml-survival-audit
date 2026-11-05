@@ -1,0 +1,121 @@
+category,bin_lo,bin_hi,n
+concordant early death,0.0,0.024999999999999998,1
+concordant early death,0.024999999999999998,0.049999999999999996,9
+concordant early death,0.049999999999999996,0.075,13
+concordant early death,0.075,0.09999999999999999,18
+concordant early death,0.09999999999999999,0.12499999999999999,19
+concordant early death,0.12499999999999999,0.15,10
+concordant early death,0.15,0.175,7
+concordant early death,0.175,0.19999999999999998,14
+concordant early death,0.19999999999999998,0.22499999999999998,8
+concordant early death,0.22499999999999998,0.24999999999999997,9
+concordant early death,0.24999999999999997,0.27499999999999997,7
+concordant early death,0.27499999999999997,0.3,4
+concordant early death,0.3,0.32499999999999996,4
+concordant early death,0.32499999999999996,0.35,2
+concordant early death,0.35,0.37499999999999994,3
+concordant early death,0.37499999999999994,0.39999999999999997,2
+concordant early death,0.39999999999999997,0.425,0
+concordant early death,0.425,0.44999999999999996,2
+concordant early death,0.44999999999999996,0.475,0
+concordant early death,0.475,0.49999999999999994,1
+concordant early death,0.49999999999999994,0.5249999999999999,0
+concordant early death,0.5249999999999999,0.5499999999999999,1
+concordant early death,0.5499999999999999,0.575,0
+concordant early death,0.575,0.6,0
+concordant survivor,0.0,0.024999999999999998,16
+concordant survivor,0.024999999999999998,0.049999999999999996,85
+concordant survivor,0.049999999999999996,0.075,149
+concordant survivor,0.075,0.09999999999999999,127
+concordant survivor,0.09999999999999999,0.12499999999999999,136
+concordant survivor,0.12499999999999999,0.15,104
+concordant survivor,0.15,0.175,74
+concordant survivor,0.175,0.19999999999999998,64
+concordant survivor,0.19999999999999998,0.22499999999999998,45
+concordant survivor,0.22499999999999998,0.24999999999999997,49
+concordant survivor,0.24999999999999997,0.27499999999999997,15
+concordant survivor,0.27499999999999997,0.3,16
+concordant survivor,0.3,0.32499999999999996,13
+concordant survivor,0.32499999999999996,0.35,10
+concordant survivor,0.35,0.37499999999999994,12
+concordant survivor,0.37499999999999994,0.39999999999999997,4
+concordant survivor,0.39999999999999997,0.425,2
+concordant survivor,0.425,0.44999999999999996,4
+concordant survivor,0.44999999999999996,0.475,0
+concordant survivor,0.475,0.49999999999999994,2
+concordant survivor,0.49999999999999994,0.5249999999999999,0
+concordant survivor,0.5249999999999999,0.5499999999999999,0
+concordant survivor,0.5499999999999999,0.575,2
+concordant survivor,0.575,0.6,3
+not ascertainable,0.0,0.024999999999999998,9
+not ascertainable,0.024999999999999998,0.049999999999999996,14
+not ascertainable,0.049999999999999996,0.075,34
+not ascertainable,0.075,0.09999999999999999,38
+not ascertainable,0.09999999999999999,0.12499999999999999,29
+not ascertainable,0.12499999999999999,0.15,19
+not ascertainable,0.15,0.175,14
+not ascertainable,0.175,0.19999999999999998,11
+not ascertainable,0.19999999999999998,0.22499999999999998,16
+not ascertainable,0.22499999999999998,0.24999999999999997,10
+not ascertainable,0.24999999999999997,0.27499999999999997,3
+not ascertainable,0.27499999999999997,0.3,3
+not ascertainable,0.3,0.32499999999999996,2
+not ascertainable,0.32499999999999996,0.35,4
+not ascertainable,0.35,0.37499999999999994,1
+not ascertainable,0.37499999999999994,0.39999999999999997,3
+not ascertainable,0.39999999999999997,0.425,0
+not ascertainable,0.425,0.44999999999999996,0
+not ascertainable,0.44999999999999996,0.475,0
+not ascertainable,0.475,0.49999999999999994,0
+not ascertainable,0.49999999999999994,0.5249999999999999,0
+not ascertainable,0.5249999999999999,0.5499999999999999,0
+not ascertainable,0.5499999999999999,0.575,0
+not ascertainable,0.575,0.6,1
+"source early death, released survivor",0.0,0.024999999999999998,2
+"source early death, released survivor",0.024999999999999998,0.049999999999999996,0
+"source early death, released survivor",0.049999999999999996,0.075,0
+"source early death, released survivor",0.075,0.09999999999999999,0
+"source early death, released survivor",0.09999999999999999,0.12499999999999999,1
+"source early death, released survivor",0.12499999999999999,0.15,4
+"source early death, released survivor",0.15,0.175,6
+"source early death, released survivor",0.175,0.19999999999999998,3
+"source early death, released survivor",0.19999999999999998,0.22499999999999998,1
+"source early death, released survivor",0.22499999999999998,0.24999999999999997,2
+"source early death, released survivor",0.24999999999999997,0.27499999999999997,3
+"source early death, released survivor",0.27499999999999997,0.3,0
+"source early death, released survivor",0.3,0.32499999999999996,0
+"source early death, released survivor",0.32499999999999996,0.35,1
+"source early death, released survivor",0.35,0.37499999999999994,2
+"source early death, released survivor",0.37499999999999994,0.39999999999999997,0
+"source early death, released survivor",0.39999999999999997,0.425,1
+"source early death, released survivor",0.425,0.44999999999999996,0
+"source early death, released survivor",0.44999999999999996,0.475,0
+"source early death, released survivor",0.475,0.49999999999999994,0
+"source early death, released survivor",0.49999999999999994,0.5249999999999999,0
+"source early death, released survivor",0.5249999999999999,0.5499999999999999,0
+"source early death, released survivor",0.5499999999999999,0.575,0
+"source early death, released survivor",0.575,0.6,0
+"source survivor, released early death",0.0,0.024999999999999998,0
+"source survivor, released early death",0.024999999999999998,0.049999999999999996,0
+"source survivor, released early death",0.049999999999999996,0.075,1
+"source survivor, released early death",0.075,0.09999999999999999,5
+"source survivor, released early death",0.09999999999999999,0.12499999999999999,7
+"source survivor, released early death",0.12499999999999999,0.15,9
+"source survivor, released early death",0.15,0.175,6
+"source survivor, released early death",0.175,0.19999999999999998,6
+"source survivor, released early death",0.19999999999999998,0.22499999999999998,2
+"source survivor, released early death",0.22499999999999998,0.24999999999999997,10
+"source survivor, released early death",0.24999999999999997,0.27499999999999997,1
+"source survivor, released early death",0.27499999999999997,0.3,2
+"source survivor, released early death",0.3,0.32499999999999996,1
+"source survivor, released early death",0.32499999999999996,0.35,2
+"source survivor, released early death",0.35,0.37499999999999994,2
+"source survivor, released early death",0.37499999999999994,0.39999999999999997,1
+"source survivor, released early death",0.39999999999999997,0.425,3
+"source survivor, released early death",0.425,0.44999999999999996,0
+"source survivor, released early death",0.44999999999999996,0.475,0
+"source survivor, released early death",0.475,0.49999999999999994,3
+"source survivor, released early death",0.49999999999999994,0.5249999999999999,0
+"source survivor, released early death",0.5249999999999999,0.5499999999999999,0
+"source survivor, released early death",0.5499999999999999,0.575,0
+"source survivor, released early death",0.575,0.6,1

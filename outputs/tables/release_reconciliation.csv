@@ -1,0 +1,8 @@
+check,n,detail
+CPTAC: LinkedOmics censored but MMIST/GDC record a later death,10,"in all 10, LinkedOmics censoring day < MMIST death day: True; LinkedOmics censoring day >= 365 in 10"
+"CPTAC: death in MMIST, none in GDC DR46 (now Alive)",1,
+"CPTAC: no death in MMIST, death in GDC DR46",1,
+CPTAC: negative death time,1,
+CPTAC: GDC index date is not diagnosis,2,
+TCGA: GDC Dead without days_to_death,9,
+TCGA: CDR vs MMIST death day differ,3,>30 days: 3; changes 365-day status: 1

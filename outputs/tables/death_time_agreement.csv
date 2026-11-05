@@ -1,0 +1,7 @@
+cohort,comparator,mmist_deaths,comparator_deaths,both_recorded,identical_days,abs_diff_gt_30d,mmist_only,comparator_only
+CPTAC,GDC DR46,90,90,89,89,0,1,1
+CPTAC,TCGA-CDR,90,0,0,0,0,90,0
+CPTAC,LinkedOmics,90,46,46,46,0,44,0
+TCGA,GDC DR46,399,399,399,399,0,0,0
+TCGA,TCGA-CDR,399,399,399,396,3,0,0
+TCGA,LinkedOmics,399,0,0,0,0,399,0

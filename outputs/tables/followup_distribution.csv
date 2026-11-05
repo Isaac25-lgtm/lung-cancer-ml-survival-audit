@@ -1,0 +1,29 @@
+cohort,status,band,n
+CPTAC,censored,0-182,36
+CPTAC,censored,1096-1825,72
+CPTAC,censored,183-364,14
+CPTAC,censored,366-730,62
+CPTAC,censored,731-1095,9
+CPTAC,censored,>1825,28
+CPTAC,death,0-182,7
+CPTAC,death,1096-1825,20
+CPTAC,death,183-364,19
+CPTAC,death,366-730,19
+CPTAC,death,731-1095,22
+CPTAC,death,>1825,2
+CPTAC,no usable time,missing,29
+TCGA,censored,0-182,82
+TCGA,censored,1096-1825,87
+TCGA,censored,183-364,35
+TCGA,censored,365,1
+TCGA,censored,366-730,205
+TCGA,censored,731-1095,107
+TCGA,censored,>1825,95
+TCGA,death,0-182,70
+TCGA,death,1096-1825,61
+TCGA,death,183-364,63
+TCGA,death,365,1
+TCGA,death,366-730,99
+TCGA,death,731-1095,63
+TCGA,death,>1825,42
+TCGA,no usable time,missing,15

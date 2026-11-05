@@ -50,3 +50,18 @@ def test_missing_artefacts_stop_app(tmp_path, monkeypatch):
     monkeypatch.setattr(dd, "TABLES", fake)
     st = dd.artefact_status()
     assert "exp_a_paired_deltas" in st["missing"]
+
+
+def test_no_undefined_or_rounding_defects():
+    """88/260 = 33.85% must display as 33.8% (exact ratio), not 33.9% (rounded twice)."""
+    src = (ROOT / "dashboard" / "app.py").read_text(encoding="utf-8")
+    assert "if title else None" not in src  # None titles render as 'undefined' in Plotly
+    assert "zip(d.discordant_pct" not in src
+    assert f"{100 * 88 / 260:.1f}" == "33.8"
+
+
+def test_tables_match_run_manifest():
+    """Every committed table matches the hash recorded by the analysis run."""
+    import dashboard.data as dd
+    st = dd.artefact_status()
+    assert st["stale"] == [], f"tables differ from run manifest: {st['stale']}"

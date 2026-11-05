@@ -1,0 +1,17 @@
+cohort,stage,n
+CPTAC,MMIST-LUNG patients,339
+CPTAC,linked to GDC DR46,339
+CPTAC,365-day status ascertainable (GDC),260
+CPTAC,  early death <=365d,26
+CPTAC,  alive >365d,234
+CPTAC,not ascertainable,79
+CPTAC,released label consistent (known),172
+CPTAC,released label inconsistent (known),88
+TCGA,MMIST-LUNG patients,1026
+TCGA,linked to GDC DR46,1026
+TCGA,365-day status ascertainable (GDC),894
+TCGA,  early death <=365d,134
+TCGA,  alive >365d,760
+TCGA,not ascertainable,132
+TCGA,released label consistent (known),894
+TCGA,released label inconsistent (known),0

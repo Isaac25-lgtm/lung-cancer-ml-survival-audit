@@ -1,0 +1,37 @@
+analysis,source,model,trained_on,cohort,evaluation,n,events,auroc_foldavg,auroc_pooled,brier_foldavg,scaled_brier_pooled,bacc_foldavg,auprc_pooled,cal_intercept,cal_slope
+primary,y_gdc_gt,logistic,released,All,"released labels, all patients (benchmark setting)",1365,196,0.6371896030677806,0.6361882648696775,0.12029142809813938,0.021796074971824564,0.5974344301382928,0.23142556220041774,-0.00023272198733754183,0.618344636837648
+primary,y_gdc_gt,logistic,released,TCGA,"released labels, all patients (benchmark setting)",1026,134,,0.629459206211097,,0.012668267846397185,,0.20671447973968357,,
+primary,y_gdc_gt,logistic,released,CPTAC,"released labels, all patients (benchmark setting)",339,62,,0.606672877605683,,0.029335365038621997,,0.3010212254132485,,
+primary,y_gdc_gt,logistic,released,All,"released labels, ascertainable patients",1154,196,0.6343606474079976,0.6329992330961612,0.13773399688501492,0.023780216207444527,0.5935034602262659,0.26466182975475483,0.19658693742472788,0.6079065792368413
+primary,y_gdc_gt,logistic,released,TCGA,"released labels, ascertainable patients",894,134,,0.6247643362136684,,0.012832071567338121,,0.22905594550291825,,
+primary,y_gdc_gt,logistic,released,CPTAC,"released labels, ascertainable patients",260,62,,0.5843923101987618,,0.017522441111597287,,0.37427912786500145,,
+primary,y_gdc_gt,logistic,released,All,"source-derived labels, ascertainable patients",1154,160,0.6002002906602085,0.5986104124748491,0.12109048863005598,-0.013791533569648795,0.5809762369748854,0.19041852103290646,-0.06264789314654773,0.2674743081270764
+primary,y_gdc_gt,logistic,released,TCGA,"source-derived labels, ascertainable patients",894,134,,0.6247643362136684,,0.012832071567338121,,0.22905594550291825,,
+primary,y_gdc_gt,logistic,released,CPTAC,"source-derived labels, ascertainable patients",260,26,,0.5603221564760026,,-0.16511818982532445,,0.12445625354748861,,
+primary,y_gdc_gt,hgb,released,All,"released labels, all patients (benchmark setting)",1365,196,0.6326477079588667,0.6314593844381209,0.1275458932116577,-0.03719687540061689,0.5830541799640512,0.2141073670394318,0.146756481272574,0.3576686888926308
+primary,y_gdc_gt,hgb,released,TCGA,"released labels, all patients (benchmark setting)",1026,134,,0.6351733485041162,,-0.01590502336015831,,0.2136455866557906,,
+primary,y_gdc_gt,hgb,released,CPTAC,"released labels, all patients (benchmark setting)",339,62,,0.5956387562594619,,-0.10042153952179356,,0.22713820507810423,,
+primary,y_gdc_gt,hgb,released,All,"released labels, ascertainable patients",1154,196,0.6242473917739613,0.6225288654083763,0.14674380104379492,-0.040020999256336065,0.5766015975553713,0.24065369403412532,0.33745633596318614,0.3297283169426178
+primary,y_gdc_gt,hgb,released,TCGA,"released labels, ascertainable patients",894,134,,0.6279359780047132,,-0.01538714255777096,,0.2351486354215002,,
+primary,y_gdc_gt,hgb,released,CPTAC,"released labels, ascertainable patients",260,62,,0.566634082763115,,-0.1342615770534461,,0.26883612676650204,,
+primary,y_gdc_gt,hgb,released,All,"source-derived labels, ascertainable patients",1154,160,0.6035170980873111,0.5972742706237425,0.12781336143094882,-0.0706098123644483,0.5758449329594054,0.19108855276634573,0.04592886430513555,0.2593262513225163
+primary,y_gdc_gt,hgb,released,TCGA,"source-derived labels, ascertainable patients",894,134,,0.6279359780047132,,-0.01538714255777096,,0.2351486354215002,,
+primary,y_gdc_gt,hgb,released,CPTAC,"source-derived labels, ascertainable patients",260,26,,0.5020545693622617,,-0.36237857410953067,,0.10878772227282706,,
+primary,y_gdc_gt,stage_only,released,All,"released labels, all patients (benchmark setting)",1365,196,0.6080742353827531,0.5958563921719243,0.1209015758420802,0.016834383790612084,0.5841706100289791,0.1953479870105848,0.005989831952696508,0.8360854109342157
+primary,y_gdc_gt,stage_only,released,TCGA,"released labels, all patients (benchmark setting)",1026,134,,0.6215280101733485,,0.023819473803328495,,0.19681032076247734,,
+primary,y_gdc_gt,stage_only,released,CPTAC,"released labels, all patients (benchmark setting)",339,62,,0.5307441481308955,,-0.012747619955539857,,0.20092246096141644,,
+primary,y_gdc_gt,stage_only,released,All,"released labels, ascertainable patients",1154,196,0.6087697627442126,0.5967736781560223,0.13890041814841123,0.015647803232769264,0.5819263719991532,0.23011222405320753,0.20719582815537105,0.8505671935414758
+primary,y_gdc_gt,stage_only,released,TCGA,"released labels, ascertainable patients",894,134,,0.622378240377062,,0.028948512087862643,,0.2257545704619218,,
+primary,y_gdc_gt,stage_only,released,CPTAC,"released labels, ascertainable patients",260,62,,0.5283072662104921,,-0.049386549116606115,,0.2613210075165948,,
+primary,y_gdc_gt,stage_only,released,All,"source-derived labels, ascertainable patients",1154,160,0.6349710294380241,0.6210701710261569,0.11628111821440053,0.02644531030202668,0.6007867432931275,0.2102797736308847,-0.039478747069628034,1.0089137039104212
+primary,y_gdc_gt,stage_only,released,TCGA,"source-derived labels, ascertainable patients",894,134,,0.622378240377062,,0.028948512087862643,,0.2257545704619218,,
+primary,y_gdc_gt,stage_only,released,CPTAC,"source-derived labels, ascertainable patients",260,26,,0.6345332018408941,,-0.00659731594483004,,0.1647577955097109,,
+primary,y_gdc_gt,prevalence,released,All,"released labels, all patients (benchmark setting)",1365,196,0.5,0.49761701087620674,0.12297293670920044,-9.820010125283218e-06,0.5,0.14300665321073483,3.729672310461123e-14,-3.9685588707314023
+primary,y_gdc_gt,prevalence,released,TCGA,"released labels, all patients (benchmark setting)",1026,134,,0.5023760123151061,,-0.0014809597034248778,,0.13114659504054071,,
+primary,y_gdc_gt,prevalence,released,CPTAC,"released labels, all patients (benchmark setting)",339,62,,0.49551647839757773,,-0.010377575682096518,,0.18156390885053159,,
+primary,y_gdc_gt,prevalence,released,All,"released labels, ascertainable patients",1154,196,0.5,0.4955583486004005,0.14180931652019618,-0.0049047504556298804,0.5,0.1686030000834444,0.19903189210691513,-7.454766375344963
+primary,y_gdc_gt,prevalence,released,TCGA,"released labels, ascertainable patients",894,134,,0.5032109190887667,,-0.0002991601969719593,,0.15071190296480697,,
+primary,y_gdc_gt,prevalence,released,CPTAC,"released labels, ascertainable patients",260,62,,0.4871293580971,,-0.04964852948723908,,0.23390731132666617,,
+primary,y_gdc_gt,prevalence,released,All,"source-derived labels, ascertainable patients",1154,160,0.5,0.49446051307847083,0.11947838035933256,-0.0002261224192661171,0.5,0.13734079343178549,-0.04079865395214246,-9.260812770443442
+primary,y_gdc_gt,prevalence,released,TCGA,"source-derived labels, ascertainable patients",894,134,,0.5032109190887667,,-0.0002991601969719593,,0.15071190296480697,,
+primary,y_gdc_gt,prevalence,released,CPTAC,"source-derived labels, ascertainable patients",260,26,,0.44017094017094016,,-0.021298584168406798,,0.09075369075369075,,

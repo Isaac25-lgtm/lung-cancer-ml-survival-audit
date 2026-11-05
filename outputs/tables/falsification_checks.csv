@@ -1,0 +1,8 @@
+check,result,expected,pass
+"label-permutation null, logistic scores, fold-avg AUROC (500 perms)","mean 0.500, 95% range 0.453-0.549",centred on 0.5,True
+"prevalence-only model, fold-averaged AUROC",0.500,0.5 exactly,True
+"prevalence-only model, POOLED out-of-fold AUROC",0.498,close to 0.5; departs because training-fold prevalence differs slightly by fold,True
+CPTAC recorded deaths: flipping released label recovers source status (excluding deaths removed upstream after the MMIST export),88/88 (+1 version-changed case excluded),all (polarity inversion),True
+"cohort (CPTAC vs TCGA) predictable from the 15 clinical features, OOF AUROC",1.0000,descriptive,True
+folds.npy regenerated from released labels with StratifiedKFold(seed 42),5/5 folds identical,5/5,True
+released folds: train/test overlap; test sets partition all patients,overlap 0; union 1365,0; 1365,True

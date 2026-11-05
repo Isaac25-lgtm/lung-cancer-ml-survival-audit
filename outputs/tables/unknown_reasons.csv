@@ -1,0 +1,7 @@
+cohort,gdc_vital_status,reason,n
+CPTAC,Alive,censored before 365 days,51
+CPTAC,Dead,negative death time,1
+CPTAC,Not Reported,no follow-up time recorded,27
+TCGA,Alive,censored before 365 days,117
+TCGA,Alive,no follow-up time recorded,6
+TCGA,Dead,"dead, no death date",9

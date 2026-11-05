@@ -1,0 +1,145 @@
+cohort,released,bin_start,n
+TCGA,released: early death,0,26
+TCGA,released: early death,60,20
+TCGA,released: early death,120,23
+TCGA,released: early death,180,15
+TCGA,released: early death,240,21
+TCGA,released: early death,300,27
+TCGA,released: early death,360,2
+TCGA,released: early death,420,0
+TCGA,released: early death,480,0
+TCGA,released: early death,540,0
+TCGA,released: early death,600,0
+TCGA,released: early death,660,0
+TCGA,released: early death,720,0
+TCGA,released: early death,780,0
+TCGA,released: early death,840,0
+TCGA,released: early death,900,0
+TCGA,released: early death,960,0
+TCGA,released: early death,1020,0
+TCGA,released: early death,1080,0
+TCGA,released: early death,1140,0
+TCGA,released: early death,1200,0
+TCGA,released: early death,1260,0
+TCGA,released: early death,1320,0
+TCGA,released: early death,1380,0
+TCGA,released: early death,1440,0
+TCGA,released: early death,1500,0
+TCGA,released: early death,1560,0
+TCGA,released: early death,1620,0
+TCGA,released: early death,1680,0
+TCGA,released: early death,1740,0
+TCGA,released: early death,1800,0
+TCGA,released: early death,1860,0
+TCGA,released: early death,1920,0
+TCGA,released: early death,1980,0
+TCGA,released: early death,2040,0
+TCGA,released: early death,2100,0
+TCGA,released: survivor,0,0
+TCGA,released: survivor,60,0
+TCGA,released: survivor,120,0
+TCGA,released: survivor,180,0
+TCGA,released: survivor,240,0
+TCGA,released: survivor,300,0
+TCGA,released: survivor,360,19
+TCGA,released: survivor,420,24
+TCGA,released: survivor,480,11
+TCGA,released: survivor,540,17
+TCGA,released: survivor,600,12
+TCGA,released: survivor,660,16
+TCGA,released: survivor,720,8
+TCGA,released: survivor,780,10
+TCGA,released: survivor,840,10
+TCGA,released: survivor,900,13
+TCGA,released: survivor,960,12
+TCGA,released: survivor,1020,9
+TCGA,released: survivor,1080,7
+TCGA,released: survivor,1140,11
+TCGA,released: survivor,1200,5
+TCGA,released: survivor,1260,5
+TCGA,released: survivor,1320,6
+TCGA,released: survivor,1380,3
+TCGA,released: survivor,1440,6
+TCGA,released: survivor,1500,4
+TCGA,released: survivor,1560,1
+TCGA,released: survivor,1620,7
+TCGA,released: survivor,1680,4
+TCGA,released: survivor,1740,3
+TCGA,released: survivor,1800,3
+TCGA,released: survivor,1860,2
+TCGA,released: survivor,1920,3
+TCGA,released: survivor,1980,2
+TCGA,released: survivor,2040,1
+TCGA,released: survivor,2100,31
+CPTAC,released: early death,0,0
+CPTAC,released: early death,60,0
+CPTAC,released: early death,120,0
+CPTAC,released: early death,180,0
+CPTAC,released: early death,240,0
+CPTAC,released: early death,300,0
+CPTAC,released: early death,360,1
+CPTAC,released: early death,420,5
+CPTAC,released: early death,480,3
+CPTAC,released: early death,540,3
+CPTAC,released: early death,600,3
+CPTAC,released: early death,660,3
+CPTAC,released: early death,720,3
+CPTAC,released: early death,780,6
+CPTAC,released: early death,840,6
+CPTAC,released: early death,900,2
+CPTAC,released: early death,960,1
+CPTAC,released: early death,1020,5
+CPTAC,released: early death,1080,2
+CPTAC,released: early death,1140,4
+CPTAC,released: early death,1200,1
+CPTAC,released: early death,1260,1
+CPTAC,released: early death,1320,2
+CPTAC,released: early death,1380,4
+CPTAC,released: early death,1440,0
+CPTAC,released: early death,1500,1
+CPTAC,released: early death,1560,1
+CPTAC,released: early death,1620,2
+CPTAC,released: early death,1680,2
+CPTAC,released: early death,1740,0
+CPTAC,released: early death,1800,1
+CPTAC,released: early death,1860,0
+CPTAC,released: early death,1920,0
+CPTAC,released: early death,1980,0
+CPTAC,released: early death,2040,0
+CPTAC,released: early death,2100,0
+CPTAC,released: survivor,0,4
+CPTAC,released: survivor,60,3
+CPTAC,released: survivor,120,1
+CPTAC,released: survivor,180,4
+CPTAC,released: survivor,240,5
+CPTAC,released: survivor,300,10
+CPTAC,released: survivor,360,0
+CPTAC,released: survivor,420,0
+CPTAC,released: survivor,480,0
+CPTAC,released: survivor,540,0
+CPTAC,released: survivor,600,0
+CPTAC,released: survivor,660,0
+CPTAC,released: survivor,720,0
+CPTAC,released: survivor,780,0
+CPTAC,released: survivor,840,0
+CPTAC,released: survivor,900,0
+CPTAC,released: survivor,960,0
+CPTAC,released: survivor,1020,0
+CPTAC,released: survivor,1080,0
+CPTAC,released: survivor,1140,0
+CPTAC,released: survivor,1200,0
+CPTAC,released: survivor,1260,0
+CPTAC,released: survivor,1320,0
+CPTAC,released: survivor,1380,0
+CPTAC,released: survivor,1440,0
+CPTAC,released: survivor,1500,0
+CPTAC,released: survivor,1560,0
+CPTAC,released: survivor,1620,0
+CPTAC,released: survivor,1680,0
+CPTAC,released: survivor,1740,0
+CPTAC,released: survivor,1800,0
+CPTAC,released: survivor,1860,0
+CPTAC,released: survivor,1920,0
+CPTAC,released: survivor,1980,0
+CPTAC,released: survivor,2040,0
+CPTAC,released: survivor,2100,0

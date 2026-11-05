@@ -61,7 +61,9 @@ def main(argv=None) -> None:
     res["handover_reproduced"] = f"{n_ok}/{len(rep)}"
     res["gdc_release"] = pd.read_csv(TABLES / "linkage_summary.csv", index_col=0).loc["gdc_release", "value"]
     (REPORTS / "results.json").write_text(json.dumps(res, indent=2, default=float))
-    hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(TABLES.glob("*.csv"))}
+    # Line endings are normalised so hashes match across operating systems and git checkouts.
+    hashes = {p.name: hashlib.sha256(p.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+              for p in sorted(TABLES.glob("*.csv"))}
     (REPORTS / "table_hashes.json").write_text(json.dumps(hashes, indent=1))
     print(json.dumps({k: res[k] for k in ["primary_contrast", "handover_reproduced", "gdc_release"]},
                      indent=2, default=float))

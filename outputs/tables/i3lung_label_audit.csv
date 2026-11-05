@@ -1,0 +1,17 @@
+label,check,value
+-,rows / unique Subject,2075 / 2075
+-,DEATH EVENT values,"{""1.0"": 1455, ""0.0"": 620}"
+OS_6,label values,"{""1.0"": 1354, ""0.0"": 618, ""nan"": 103}"
+OS_6,agreement with OS time/event if 1 = death within horizon,0/1972
+OS_6,agreement with OS time/event if 1 = alive at horizon,1972/1972
+OS_6,label present but censored before horizon (not ascertainable),0
+OS_6,label missing,103
+OS_6,label missing although ascertainable,0
+OS_6,exactly on horizon (boundary cases),0
+OS_24,label values,"{""0.0"": 1240, ""1.0"": 459, ""nan"": 376}"
+OS_24,agreement with OS time/event if 1 = death within horizon,0/1699
+OS_24,agreement with OS time/event if 1 = alive at horizon,1699/1699
+OS_24,label present but censored before horizon (not ascertainable),0
+OS_24,label missing,376
+OS_24,label missing although ascertainable,0
+OS_24,exactly on horizon (boundary cases),0

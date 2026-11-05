@@ -1,0 +1,74 @@
+source,cohort,histology,released,source_state,n
+gdc_gt,CPTAC,LUAD,released early death,alive >365d,36
+gdc_gt,CPTAC,LUAD,released survivor,alive >365d,118
+gdc_gt,CPTAC,LUAD,released survivor,early death,20
+gdc_gt,CPTAC,LUAD,released survivor,unknown,56
+gdc_gt,CPTAC,LUSC,released early death,alive >365d,26
+gdc_gt,CPTAC,LUSC,released survivor,alive >365d,54
+gdc_gt,CPTAC,LUSC,released survivor,early death,6
+gdc_gt,CPTAC,LUSC,released survivor,unknown,23
+gdc_gt,TCGA,LUAD,released early death,early death,58
+gdc_gt,TCGA,LUAD,released survivor,alive >365d,402
+gdc_gt,TCGA,LUAD,released survivor,unknown,62
+gdc_gt,TCGA,LUSC,released early death,early death,76
+gdc_gt,TCGA,LUSC,released survivor,alive >365d,358
+gdc_gt,TCGA,LUSC,released survivor,unknown,70
+gdc_ge,CPTAC,LUAD,released early death,alive >365d,36
+gdc_ge,CPTAC,LUAD,released survivor,alive >365d,118
+gdc_ge,CPTAC,LUAD,released survivor,early death,20
+gdc_ge,CPTAC,LUAD,released survivor,unknown,56
+gdc_ge,CPTAC,LUSC,released early death,alive >365d,26
+gdc_ge,CPTAC,LUSC,released survivor,alive >365d,54
+gdc_ge,CPTAC,LUSC,released survivor,early death,6
+gdc_ge,CPTAC,LUSC,released survivor,unknown,23
+gdc_ge,TCGA,LUAD,released early death,early death,58
+gdc_ge,TCGA,LUAD,released survivor,alive >365d,402
+gdc_ge,TCGA,LUAD,released survivor,unknown,62
+gdc_ge,TCGA,LUSC,released early death,alive >365d,1
+gdc_ge,TCGA,LUSC,released early death,early death,75
+gdc_ge,TCGA,LUSC,released survivor,alive >365d,358
+gdc_ge,TCGA,LUSC,released survivor,unknown,70
+alt_gt,CPTAC,LUAD,released early death,alive >365d,17
+alt_gt,CPTAC,LUAD,released early death,unknown,19
+alt_gt,CPTAC,LUAD,released survivor,alive >365d,69
+alt_gt,CPTAC,LUAD,released survivor,early death,8
+alt_gt,CPTAC,LUAD,released survivor,unknown,117
+alt_gt,CPTAC,LUSC,released early death,alive >365d,26
+alt_gt,CPTAC,LUSC,released survivor,alive >365d,52
+alt_gt,CPTAC,LUSC,released survivor,early death,5
+alt_gt,CPTAC,LUSC,released survivor,unknown,26
+alt_gt,TCGA,LUAD,released early death,early death,58
+alt_gt,TCGA,LUAD,released survivor,alive >365d,402
+alt_gt,TCGA,LUAD,released survivor,unknown,62
+alt_gt,TCGA,LUSC,released early death,alive >365d,1
+alt_gt,TCGA,LUSC,released early death,early death,75
+alt_gt,TCGA,LUSC,released survivor,alive >365d,358
+alt_gt,TCGA,LUSC,released survivor,unknown,70
+consensus_gt,CPTAC,LUAD,released early death,alive >365d,17
+consensus_gt,CPTAC,LUAD,released early death,unknown,19
+consensus_gt,CPTAC,LUAD,released survivor,alive >365d,69
+consensus_gt,CPTAC,LUAD,released survivor,early death,8
+consensus_gt,CPTAC,LUAD,released survivor,unknown,117
+consensus_gt,CPTAC,LUSC,released early death,alive >365d,26
+consensus_gt,CPTAC,LUSC,released survivor,alive >365d,52
+consensus_gt,CPTAC,LUSC,released survivor,early death,5
+consensus_gt,CPTAC,LUSC,released survivor,unknown,26
+consensus_gt,TCGA,LUAD,released early death,early death,58
+consensus_gt,TCGA,LUAD,released survivor,alive >365d,402
+consensus_gt,TCGA,LUAD,released survivor,unknown,62
+consensus_gt,TCGA,LUSC,released early death,early death,75
+consensus_gt,TCGA,LUSC,released early death,unknown,1
+consensus_gt,TCGA,LUSC,released survivor,alive >365d,358
+consensus_gt,TCGA,LUSC,released survivor,unknown,70
+mmistfields_gt,CPTAC,LUAD,released early death,alive >365d,36
+mmistfields_gt,CPTAC,LUAD,released survivor,early death,21
+mmistfields_gt,CPTAC,LUAD,released survivor,unknown,173
+mmistfields_gt,CPTAC,LUSC,released early death,alive >365d,26
+mmistfields_gt,CPTAC,LUSC,released survivor,early death,6
+mmistfields_gt,CPTAC,LUSC,released survivor,unknown,77
+mmistfields_gt,TCGA,LUAD,released early death,early death,58
+mmistfields_gt,TCGA,LUAD,released survivor,alive >365d,384
+mmistfields_gt,TCGA,LUAD,released survivor,unknown,80
+mmistfields_gt,TCGA,LUSC,released early death,early death,76
+mmistfields_gt,TCGA,LUSC,released survivor,alive >365d,341
+mmistfields_gt,TCGA,LUSC,released survivor,unknown,87

@@ -1,0 +1,19 @@
+ordering,stratifying_label,released_folds_reproduced_exactly,mean_best_overlap
+ascending submitter_id (PatientDataset order),vital_status_12 (released),0,0.228
+ascending submitter_id (PatientDataset order),vital_status_dss (released),0,0.242
+ascending submitter_id (PatientDataset order),TCGA rule applied to all patients,0,0.236
+ascending submitter_id (PatientDataset order),notebook rule applied to all patients,0,0.227
+ascending submitter_id (PatientDataset order),death recorded (any time),0,0.235
+ascending submitter_id (PatientDataset order),cohort,0,0.226
+"TCGA first, then CPTAC (both sorted)",vital_status_12 (released),0,0.819
+"TCGA first, then CPTAC (both sorted)",vital_status_dss (released),0,0.223
+"TCGA first, then CPTAC (both sorted)",TCGA rule applied to all patients,0,0.241
+"TCGA first, then CPTAC (both sorted)",notebook rule applied to all patients,0,0.234
+"TCGA first, then CPTAC (both sorted)",death recorded (any time),0,0.226
+"TCGA first, then CPTAC (both sorted)",cohort,0,0.226
+"sorted TCGA, then CPTAC in diagnosis.csv order",vital_status_12 (released),5,1.0
+"sorted TCGA, then CPTAC in diagnosis.csv order",vital_status_dss (released),0,0.223
+"sorted TCGA, then CPTAC in diagnosis.csv order",TCGA rule applied to all patients,0,0.226
+"sorted TCGA, then CPTAC in diagnosis.csv order",notebook rule applied to all patients,0,0.223
+"sorted TCGA, then CPTAC in diagnosis.csv order",death recorded (any time),0,0.23
+"sorted TCGA, then CPTAC in diagnosis.csv order",cohort,0,0.226

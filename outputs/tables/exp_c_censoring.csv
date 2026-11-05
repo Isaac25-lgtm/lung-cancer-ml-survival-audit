@@ -1,0 +1,22 @@
+scores,method,n_used,auroc,brier,auroc_lo,auroc_hi,c_index
+logistic trained on released labels,complete case (ascertainable only),1154,0.5986104124748491,0.1210719143563019,,,
+logistic trained on released labels,"IPCW, censoring KM stratified by cohort",1153,0.5970642130276111,0.11312314409934043,,,
+logistic trained on released labels,"IPCW, pooled censoring KM",1153,0.5981394528764351,0.11323478004386969,,,
+logistic trained on released labels,unknown imputed as survivor (released practice),1365,0.603003112033195,0.10628095910400932,,,
+logistic trained on released labels,unknown imputed as early death,1365,0.5261189780190577,0.22005391350439085,,,
+logistic trained on released labels,sharp bounds over all completions of unknowns,1365,,,0.42859807885382467,0.6882898208582141,
+logistic trained on released labels,"Harrell C-index, OS (GDC), all usable follow-up",1321,,,,,0.5865508858446961
+logistic trained on source-derived labels,complete case (ascertainable only),1154,0.6463531187122736,0.116479612465061,,,
+logistic trained on source-derived labels,"IPCW, censoring KM stratified by cohort",1153,0.6475147419682127,0.10850795247121461,,,
+logistic trained on source-derived labels,"IPCW, pooled censoring KM",1153,0.6467138312715689,0.10882105217753021,,,
+logistic trained on source-derived labels,unknown imputed as survivor (released practice),1365,0.6410788381742739,0.10770319681105657,,,
+logistic trained on source-derived labels,unknown imputed as early death,1365,0.5782620249800691,0.21213287687465404,,,
+logistic trained on source-derived labels,sharp bounds over all completions of unknowns,1365,,,0.46833800459870206,0.7341523922475267,
+logistic trained on source-derived labels,"Harrell C-index, OS (GDC), all usable follow-up",1321,,,,,0.6224703056301508
+stage-only trained on released labels,complete case (ascertainable only),1154,0.6210701710261569,0.11626663481520509,,,
+stage-only trained on released labels,"IPCW, censoring KM stratified by cohort",1153,0.6214463054303465,0.10821572368537616,,,
+stage-only trained on released labels,"IPCW, pooled censoring KM",1153,0.6213690965817383,0.10844584242071886,,,
+stage-only trained on released labels,unknown imputed as survivor (released practice),1365,0.6199766597510373,0.10185922248410016,,,
+stage-only trained on released labels,unknown imputed as early death,1365,0.5554052075254763,0.2129923581719893,,,
+stage-only trained on released labels,sharp bounds over all completions of unknowns,1365,,,0.45128137695251674,0.7105441536433815,
+stage-only trained on released labels,"Harrell C-index, OS (GDC), all usable follow-up",1321,,,,,0.6008958174948907

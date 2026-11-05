@@ -41,7 +41,7 @@ def artefact_status() -> dict:
         p = TABLES / f"{n}.csv"
         if not p.exists():
             continue
-        h = hashlib.sha256(p.read_bytes()).hexdigest()
+        h = hashlib.sha256(p.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
         ok = hashes.get(f"{n}.csv") == h if hashes else None
         if ok is False:
             stale.append(n)
