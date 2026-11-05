@@ -31,12 +31,10 @@ ROWS = [
                        "A Reproducible Censoring-Aware Reanalysis",
          authors="Tadj et al.", year=2026, type="Journal article, BioMedInformatics 6(4):60 (2026-08-14)",
          url="https://doi.org/10.3390/biomedinformatics6040060",
-         population="Breast cancer (publisher blocked automated retrieval and no Europe PMC record was found; full text not reviewed)", outcome="Prognosis, censoring-aware",
-         methods="Leakage and temporal-misalignment audit", main_result="Metadata verified via Crossref only",
+         population="Public SEER-derived breast cancer extract (IEEE DataPort), 4,023 women, 616 deaths; no patient identifiers", outcome="End-of-follow-up vital status (audited) and time to all-cause death (Weibull AFT)",
+         methods="Reproduced an SVM workflow; row-hash overlap; split-first and baseline-only reanalyses; penalized Weibull AFT", main_result="Pre-split oversampling: 50.5% of test rows duplicated in training, AUROC 0.998, falling to 0.715 split-first; baseline-only SVM AUROC 0.745; adding survival months gives 0.895; AFT C-index 0.753",
          relation="Closest generic methodological audit, different cancer.",
-         our_critique="Our contribution differs: deterministic source-linked reconstruction of how a released benchmark "
-                      "label was generated (cohort-specific polarity inversion) quantified against upstream GDC records, "
-                      "plus fixed-score paired evaluation. Full text must be read before submission."),
+         our_critique="Full text reviewed (2026-11-05). Closest generic audit, but of the modelling PIPELINE (resampling order, post-baseline predictor) on one unlinkable dataset; the authors state patient-level linkage was not possible. We audit the OUTCOME LABEL via source linkage, in pipelines without leakage. Complementary, not overlapping."),
     dict(rank=3, title="Pervasive Label Errors in Test Sets Destabilize Machine Learning Benchmarks",
          authors="Northcutt CG, Athalye A, Mueller J", year=2021,
          type="NeurIPS 2021 Datasets and Benchmarks (arXiv 2103.14749)", url="https://arxiv.org/abs/2103.14749",

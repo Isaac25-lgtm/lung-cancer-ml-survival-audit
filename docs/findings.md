@@ -243,7 +243,7 @@ The procedure does not raise false alarms, and correct practice exists in a comp
 ## 8. Conditions for full GO, and next steps
 
 1. **Responsible disclosure.** Isaac decides whether to open a GitHub issue or email the MMIST-LUNG authors with the rule reproduction. Recommended before submission; **not done**. Their reply could also settle which fold alignment and which 12-month configuration they ran.
-2. **Systematic search.** Run PubMed, Scopus, Google Scholar and Semantic Scholar searches with citation tracking of arXiv 2609.05202, and read Tadj et al. in full.
+2. **Systematic search.** Run PubMed, Scopus, Google Scholar and Semantic Scholar searches with citation tracking of arXiv 2609.05202. (Tadj et al. has now been read in full: it audits a modelling pipeline on one unlinkable dataset, so it complements this study rather than overlapping it.)
 3. **Confirm the post-hoc findings.** Pre-specify the training-label and cohort-reversal analyses for any extension, and refit models inside the bootstrap so intervals include fitting uncertainty.
 4. **For a full article rather than a correspondence:** extend the audit to at least two more public multi-cohort survival benchmarks (fallback B), or re-run the original MMIST pipeline (torch) to quantify the effect on the published numbers directly.
 5. Confirm the institution's ethics requirements for secondary analysis of public data.

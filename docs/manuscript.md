@@ -41,7 +41,7 @@ Two literatures bear on this problem without addressing it directly:
 - **Benchmark label errors.** Work on label errors in machine-learning benchmarks has shown that test-set errors can change model rankings [11]. Those errors are detected statistically and verified by people, outside clinical survival data.
 - **Censoring-aware evaluation.** Methods such as inverse-probability-of-censoring weighting (IPCW) and partial identification assume the time-and-event data feeding a label are correctly encoded [7–10,12].
 
-In oncology, curated endpoint resources and data-readiness audits improve endpoint definitions within a resource [13,14], and leakage audits examine temporal misalignment [15]. None reconstructs how a released benchmark label was generated from its upstream records, and none separates the effect of that label on evaluation from its effect on training.
+In oncology, curated endpoint resources and data-readiness audits improve endpoint definitions within a resource [13,14], and leakage audits show how pipeline order and post-baseline predictors inflate performance [15,16]. The closest such audit, of a public breast cancer registry extract, found that oversampling before the train-test split placed duplicates of half the test rows in training (AUROC 0.998, versus 0.715 when split first). It also noted that patient-level linkage to another dataset was not possible [16]. None reconstructs how a released benchmark label was generated from its upstream records, and none separates the effect of that label on evaluation from its effect on training.
 
 Internal validation cannot detect such errors. Cross-validation estimates performance against the released label, often on folds stratified by that label, so a model of the wrong target scores well. When clinical features identify the source cohort, a flexible model can also learn a cohort-specific labelling artefact as if it were biology.
 
@@ -53,13 +53,13 @@ To audit the provenance of released 12-month survival labels in public multimoda
 
 ### Data sources
 
-**MMIST-LUNG** [16] contains 1,365 patients: 522 TCGA-LUAD, 504 TCGA-LUSC and 339 CPTAC-3 lung. It provides a 12-month label (`vital_status_12`), clinical features, and five-fold cross-validation folds (`folds.npy`), pinned to repository commit `430670ce`.
+**MMIST-LUNG** [17] contains 1,365 patients: 522 TCGA-LUAD, 504 TCGA-LUSC and 339 CPTAC-3 lung. It provides a 12-month label (`vital_status_12`), clinical features, and five-fold cross-validation folds (`folds.npy`), pinned to repository commit `430670ce`.
 
-**MMIST-ccRCC** [17], from the same initiative, contains 618 patients (429 TCGA-KIRC and 189 CPTAC-CCRCC) with a 12-month label and a released train/test split, pinned to commit `c3f1a066`.
+**MMIST-ccRCC** [18], from the same initiative, contains 618 patients (429 TCGA-KIRC and 189 CPTAC-CCRCC) with a 12-month label and a released train/test split, pinned to commit `c3f1a066`.
 
-**Source records** came from GDC Data Release 46.0 (10 August 2026) [1]. Two alternative releases describing the same participants were used for sensitivity analyses: the TCGA Clinical Data Resource (TCGA-CDR) [13] and LinkedOmics CPTAC tables [18,19]. Primary cohort references are [2–6,20,21].
+**Source records** came from GDC Data Release 46.0 (10 August 2026) [1]. Two alternative releases describing the same participants were used for sensitivity analyses: the TCGA Clinical Data Resource (TCGA-CDR) [13] and LinkedOmics CPTAC tables [19,20]. Primary cohort references are [2–6,21,22].
 
-**I3LUNG** [22], an independent multicentre immunotherapy cohort (Zenodo record 17535424; CC BY-NC 4.0), served as a negative control. It was used only to audit its own labels against its own time and event fields.
+**I3LUNG** [23], an independent multicentre immunotherapy cohort (Zenodo record 17535424; CC BY-NC 4.0), served as a negative control. It was used only to audit its own labels against its own time and event fields.
 
 Every input was downloaded programmatically, and its SHA-256 hash and retrieval time were recorded. All data are public and de-identified, and no institutional data were used.
 
@@ -120,7 +120,7 @@ Predictors were the released clinical features (15 in MMIST-LUNG, 17 in MMIST-cc
 - **Uncertainty for the confirmatory ψ_B** came from a refit bootstrap (200 replicates): patients were resampled within each fold, and both models were refitted on every replicate, so the intervals include model-fitting uncertainty.
 - **Multiplicity:** confirmatory tests were Holm-adjusted.
 
-Reporting follows applicable TRIPOD+AI items [23].
+Reporting follows applicable TRIPOD+AI items [24].
 
 ### Reproducibility and ethics
 
@@ -243,7 +243,7 @@ The pair-level decomposition explains why. When features identify the cohort, a 
 
 ### Comparison with prior work
 
-Northcutt et al. showed that random-looking test-set errors can reorder models [11]. The errors here are systematic, cohort-conditional and deterministic, so they cannot be found by noise-detection methods that assume errors are scattered. Leakage audits [15] and censoring-aware evaluation [7,8,12] address different failure points, and binarisation critiques [24] argue for time-to-event targets, which would have avoided forced outcomes but not the inversion. Unlike work that harmonises raw records [14], we audited labels already released as a benchmark.
+Northcutt et al. showed that random-looking test-set errors can reorder models [11]. The errors here are systematic, cohort-conditional and deterministic, so they cannot be found by noise-detection methods that assume errors are scattered. Tadj et al. audited a modelling workflow on a single, unlinkable registry extract. They found leakage through resampling order and through a post-baseline predictor, and used a censoring-aware survival model as the corrected benchmark [16]. Our audit targets the outcome label rather than the pipeline: the pipelines here were leakage-controlled, yet the labels were wrong. The two failure modes need different checks, and errors in label construction fall outside the usual leakage categories [15]. Censoring-aware evaluation [7,8,12] addresses a different failure point again, and binarisation critiques [25] argue for time-to-event targets, which would have avoided forced outcomes but not the inversion. Unlike work that harmonises raw records [14], we audited labels already released as a benchmark.
 
 ### Recommendations for benchmark curators and users
 
@@ -302,16 +302,17 @@ Released survival labels in public benchmarks can be internally consistent, pass
 12. Kvamme H, Borgan Ø. The Brier score under administrative censoring: problems and solutions. arXiv:1912.08581. 2019.
 13. Liu J, Lichtenberg T, Hoadley KA, et al. An integrated TCGA pan-cancer clinical data resource to drive high-quality survival outcome analytics. *Cell*. 2018;173(2):400-416.e11. doi:10.1016/j.cell.2018.02.052
 14. Ahsan MM, Raman S, Siddique Z. Harmonizing public lung adenocarcinoma data for reproducible machine learning. NeurIPS 2026 Workshop on AI Data Readiness for Scientific Discovery.
-15. Tadj L, Sufian MA, Hamzi W, Ali M, Ali A, Hamzi B. Auditing data leakage and temporal misalignment in machine-learning prognosis of breast cancer: a reproducible censoring-aware reanalysis. *BioMedInformatics*. 2026;6(4):60. doi:10.3390/biomedinformatics6040060
-16. Cordeiro Mendes R, Fonseca Verdelho MR, Santiago C, Barata C. Real-world multi-modal and longitudinal lung cancer dataset. arXiv:2609.05202. 2026.
-17. Mota T, Verdelho MR, Bissoto A, Santiago C, Barata C. MMIST-ccRCC: a real world medical dataset for the development of multi-modal systems. DCA in MI Workshop, CVPR 2024. arXiv:2405.01658
-18. Vasaikar SV, Straub P, Wang J, Zhang B. LinkedOmics: analyzing multi-omics data within and across 32 cancer types. *Nucleic Acids Res*. 2018;46(D1):D956-D963. doi:10.1093/nar/gkx1090
-19. Clark DJ, Dhanasekaran SM, Petralia F, et al. Integrated proteogenomic characterization of clear cell renal cell carcinoma. *Cell*. 2019;179(4):964-983.e31. doi:10.1016/j.cell.2019.10.007
-20. The Cancer Genome Atlas Research Network. Comprehensive molecular characterization of clear cell renal cell carcinoma. *Nature*. 2013;499(7456):43-49. doi:10.1038/nature12222
-21. Zheng Y, Conrad RD, Green EJ, et al. Graph attention-based fusion of pathology images and gene expression for prediction of cancer survival. *IEEE Trans Med Imaging*. 2024;43(9):3085-3097. doi:10.1109/TMI.2024.3386108
-22. Prelaj A, Miskovic V, Sacco M, et al. Clinical usability of an explainable AI decision support tool and evaluation of multimodal models in NSCLC. *Nat Med*. 2026;32(9):3235-3247. doi:10.1038/s41591-026-04488-2
-23. Collins GS, Moons KGM, Dhiman P, et al. TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods. *BMJ*. 2024;385:e078378. doi:10.1136/bmj-2023-078378
-24. Yadav S, Routman DM, Foong AYK. The cost of binarizing survival outcomes in clinical prognostic modeling. arXiv:2608.04046. 2026.
+15. Kapoor S, Narayanan A. Leakage and the reproducibility crisis in machine-learning-based science. *Patterns*. 2023;4(9):100804. doi:10.1016/j.patter.2023.100804
+16. Tadj L, Sufian MA, Hamzi W, Ali M, Ali A, Hamzi B. Auditing data leakage and temporal misalignment in machine-learning prognosis of breast cancer: a reproducible censoring-aware reanalysis. *BioMedInformatics*. 2026;6(4):60. doi:10.3390/biomedinformatics6040060
+17. Cordeiro Mendes R, Fonseca Verdelho MR, Santiago C, Barata C. Real-world multi-modal and longitudinal lung cancer dataset. arXiv:2609.05202. 2026.
+18. Mota T, Verdelho MR, Bissoto A, Santiago C, Barata C. MMIST-ccRCC: a real world medical dataset for the development of multi-modal systems. DCA in MI Workshop, CVPR 2024. arXiv:2405.01658
+19. Vasaikar SV, Straub P, Wang J, Zhang B. LinkedOmics: analyzing multi-omics data within and across 32 cancer types. *Nucleic Acids Res*. 2018;46(D1):D956-D963. doi:10.1093/nar/gkx1090
+20. Clark DJ, Dhanasekaran SM, Petralia F, et al. Integrated proteogenomic characterization of clear cell renal cell carcinoma. *Cell*. 2019;179(4):964-983.e31. doi:10.1016/j.cell.2019.10.007
+21. The Cancer Genome Atlas Research Network. Comprehensive molecular characterization of clear cell renal cell carcinoma. *Nature*. 2013;499(7456):43-49. doi:10.1038/nature12222
+22. Zheng Y, Conrad RD, Green EJ, et al. Graph attention-based fusion of pathology images and gene expression for prediction of cancer survival. *IEEE Trans Med Imaging*. 2024;43(9):3085-3097. doi:10.1109/TMI.2024.3386108
+23. Prelaj A, Miskovic V, Sacco M, et al. Clinical usability of an explainable AI decision support tool and evaluation of multimodal models in NSCLC. *Nat Med*. 2026;32(9):3235-3247. doi:10.1038/s41591-026-04488-2
+24. Collins GS, Moons KGM, Dhiman P, et al. TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods. *BMJ*. 2024;385:e078378. doi:10.1136/bmj-2023-078378
+25. Yadav S, Routman DM, Foong AYK. The cost of binarizing survival outcomes in clinical prognostic modeling. arXiv:2608.04046. 2026.
 
 ---
 

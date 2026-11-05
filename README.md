@@ -62,7 +62,7 @@ Internal validation cannot detect either one. Cross-validation estimates perform
 | Label errors in ML benchmarks [[11]](#ref-11) | Test-set errors can change model rankings | Errors are flagged statistically and confirmed by people, outside clinical survival data; no upstream record to reconstruct them from |
 | Censoring-aware evaluation [[19]](#ref-19) [[20]](#ref-20) [[21]](#ref-21) [[16]](#ref-16) | How to score predictions under censoring, and the cost of binarising | Assumes the time and event data feeding the label were encoded correctly |
 | Curated clinical endpoints and data readiness [[7]](#ref-7) [[15]](#ref-15) | Endpoint curation and harmonisation within a resource | Not an audit of a released multi-cohort benchmark label |
-| Audits of label definition and leakage [[12]](#ref-12) [[14]](#ref-14) | Definitions and leakage can distort evaluation in breast cancer | Different cancer and tasks. [[12]](#ref-12) is the closest generic audit; its metadata was checked, but its full text could not be retrieved and must be read before submission |
+| Leakage and label-definition audits [[12]](#ref-12) [[14]](#ref-14) [[26]](#ref-26) | Resampling order and post-baseline predictors inflate performance. The closest audit, Tadj et al. [[12]](#ref-12), took a breast cancer registry extract from AUROC 0.998 to 0.715 by splitting before oversampling | Audits the **pipeline**, not the label, on a single dataset where, in the authors' words, "patient-level linkage to another dataset … [was] not possible". Here the pipeline is clean and the **label** is wrong, which needs a different check |
 
 **The gap we address:** we found no study that reconstructs a released survival label exactly from its upstream records, per cohort, and then separates the effects of that label on evaluation, training and model comparison on identical patients. The searches, including the benchmark's GitHub issues, were not systematic, so this is a defensible gap rather than a claim of priority ([register](outputs/tables/literature_register.csv)).
 
@@ -411,3 +411,5 @@ The views expressed are the authors' own and do not represent their institutions
 <a id="ref-24"></a>24. The Cancer Genome Atlas Research Network. Comprehensive molecular characterization of clear cell renal cell carcinoma. *Nature*. 2013;499(7456):43-49. <https://doi.org/10.1038/nature12222>
 
 <a id="ref-25"></a>25. Clark DJ, Dhanasekaran SM, Petralia F, et al. Integrated Proteogenomic Characterization of Clear Cell Renal Cell Carcinoma. *Cell*. 2019;179(4):964-983.e31. <https://doi.org/10.1016/j.cell.2019.10.007>
+
+<a id="ref-26"></a>26. Kapoor S, Narayanan A. Leakage and the reproducibility crisis in machine-learning-based science. *Patterns*. 2023;4(9):100804. <https://doi.org/10.1016/j.patter.2023.100804>
