@@ -303,6 +303,8 @@ Requires Python 3.11 or 3.12. A full run takes about 15 minutes on a laptop CPU 
 
 | Path | Contents |
 |---|---|
+| [`docs/HANDOFF.md`](docs/HANDOFF.md) | **Start here if you are continuing the work** |
+| [`docs/manuscript.md`](docs/manuscript.md), [`manuscript.docx`](outputs/manuscript/manuscript.docx) | Submission draft |
 | [`docs/findings.md`](docs/findings.md) | Full report with every number and the decision gates |
 | [`docs/manuscript_draft.md`](docs/manuscript_draft.md) | Draft abstract, outline, limitations and evidence ledger |
 | [`docs/protocol.md`](docs/protocol.md), [`docs/methods.md`](docs/methods.md), [`docs/changelog.md`](docs/changelog.md) | The plan, implementation details and every deviation |
