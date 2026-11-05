@@ -2,27 +2,27 @@
 
 **Running title:** Survival label audit of multimodal cancer benchmarks
 
-**Authors:** Omoding Isaac¹\*, Echodu Moses², Bob Tumushime³, Noah Okiror⁴, Daniel Baguma⁴
+**Authors:** Omoding Isaac¹\*, Echodu Moses², Bob Tumushime³, Noah Okiror⁴, Daniel Baguma⁵
 
-¹ Ministry of Health · ² Uganda Cancer Institute · ³ Uganda Bureau of Statistics (UBOS) · ⁴ Malaria Consortium
+¹ Ministry of Health · ² Uganda Cancer Institute · ³ Uganda Bureau of Statistics (UBOS) · ⁴ Malaria Consortium · ⁵ Malaria Consortium
 
 \*Corresponding author: Omoding Isaac, omodingisaac111@gmail.com
 
 **Article type:** Research and applications (short report)
 
-**Word count:** abstract 298; main text about 3,900 (excluding tables, figure legends and references)
+**Word count:** abstract 250; main text about 3,100 (including in-text tables; excluding Tables 1–3, figure legends and references)
 
 ---
 
 ## Abstract
 
-**Objective.** Public multimodal cancer benchmarks often release a binary fixed-horizon survival label built from heterogeneous clinical sources. We audited whether released labels agree with upstream records, and how disagreement affects machine-learning training and evaluation.
+**Objective.** To audit whether released fixed-horizon survival labels in public multimodal cancer benchmarks agree with upstream records, and how disagreement affects machine learning.
 
-**Materials and Methods.** We linked every patient in two public benchmarks from one initiative, MMIST-LUNG (n = 1,365; TCGA and CPTAC lung cancer) and MMIST-ccRCC (n = 618; TCGA and CPTAC kidney cancer), to Genomic Data Commons records, and derived a three-state 12-month status (early death, survivor, not ascertainable). An independent resource, I3LUNG (n = 2,075), served as a negative control. We reverse-engineered label-generating rules, quantified agreement, and estimated evaluation-label and training-label effects on identical patients under a protocol frozen before analysis, with a second protocol committed publicly before the replication data were examined.
+**Materials and Methods.** We linked all patients in MMIST-LUNG (n = 1,365) and MMIST-ccRCC (n = 618), each pooling TCGA and CPTAC cohorts, to Genomic Data Commons records and derived three-state 12-month status. I3LUNG (n = 2,075) was a negative control. We reconstructed label-generating rules and estimated evaluation-label and training-label effects on identical patients. A replication protocol was committed publicly before its data were examined.
 
-**Results.** In MMIST-LUNG, two opposite-polarity rules reproduced all 1,365 labels. Among ascertainable CPTAC patients, 88 of 260 labels (33.8%; 95% CI 28.4–39.8) contradicted the source, including every released early death. A further 211 patients (15.5%) had unascertainable status and were labelled survivors. MMIST-ccRCC showed no inversion (199 of 200 recorded deaths agreed), but 38 CPTAC patients with unascertainable status were forced into classes. All 18 labelled as deaths had missing pathological stage, a pattern a model can exploit, and including these patients raised logistic-regression AUROC from 0.791 to 0.832. I3LUNG labels were fully consistent. In MMIST-LUNG, the pre-specified evaluation-label contrast was small (ΔAUROC −0.034; 95% CI −0.068 to −0.003). A confirmatory refit-bootstrap test showed that training on source-derived labels improved AUROC by 0.049 (95% CI 0.008–0.091). Benchmark-style evaluation favoured the opposite model.
+**Results.** In MMIST-LUNG, two opposite-polarity rules reproduced all 1,365 labels. In CPTAC, 88 of 260 ascertainable labels (33.8%) contradicted the source, including every released early death. A further 211 patients with unknown status were labelled survivors. MMIST-ccRCC showed no inversion, but 18 unverifiable deaths, all with missing stage, inflated logistic AUROC from 0.791 to 0.832. I3LUNG was fully consistent. With predictions fixed, the evaluation-label effect was small (ΔAUROC −0.034; 95% CI −0.068 to −0.003). In a confirmatory test with models refitted on every bootstrap replicate, training on source-derived labels improved AUROC by 0.049 (95% CI 0.008–0.091), yet benchmark-style evaluation favoured the opposite model.
 
-**Discussion.** Label provenance errors were systematic, cohort-specific and invisible to cross-validation. Their main effect was on training and model selection rather than on scores for fixed predictions.
+**Discussion.** Label errors were systematic, cohort-specific and invisible to cross-validation. They acted mainly through training and model selection.
 
 **Conclusion.** Source-linked label audits are inexpensive and should precede benchmarking on pooled clinical cohorts.
 
@@ -198,10 +198,10 @@ These mechanism analyses were post-hoc.
 
 **C2 was confirmed.** In the released folds, logistic regression trained on source-derived labels outperformed the same model trained on released labels when both were judged against source labels: ψ_B +0.049 (95% CI +0.008 to +0.091; refit bootstrap, 200 replicates; one-sided p = 0.010; Holm-adjusted p = 0.010; Figure 5).
 
-**Pre-specified secondary analyses (S4):**
+**Pre-specified secondary analyses (S4)** were only partly supported:
 
-- **XGBoost:** ψ_B [S4_XGB].
-- **Multilayer perceptron:** ψ_B [S4_MLP].
+- **XGBoost:** ψ_B +0.051 (95% CI −0.002 to +0.093; one-sided p = 0.050). The effect points the same way and is the same size, but the interval narrowly includes zero.
+- **Multilayer perceptron:** ψ_B +0.028 (95% CI −0.093 to +0.101; p = 0.43). The estimate was unstable with only 160 events.
 
 **Supporting analyses:**
 
@@ -237,7 +237,7 @@ The audit therefore discriminates between resources rather than finding problems
 
 ### Where label errors do their damage
 
-The effect of label errors fell less on scoring fixed predictions (small and fragile) than on what models learn and which model wins. The confirmatory test showed a training-label effect of about 0.05 AUROC, and benchmark-style evaluation reversed the ranking.
+The effect of label errors fell less on scoring fixed predictions (small and fragile) than on what models learn and which model wins. The confirmatory test showed a training-label effect of about 0.05 AUROC for logistic regression, and benchmark-style evaluation reversed the ranking. For XGBoost and a multilayer perceptron the effect pointed the same way but was not resolved.
 
 The pair-level decomposition explains why. When features identify the cohort, a model learns the cohort-level risk ordering implied by its labels. Pooled metrics then reward that ordering through between-cohort pairs. The same mechanism applies to any pooled benchmark with cohort-conditional label errors, including site, scanner or era effects.
 

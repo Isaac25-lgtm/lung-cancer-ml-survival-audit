@@ -25,6 +25,26 @@ The working title is supported. A more specific alternative, if a venue prefers 
 
 ---
 
+## Update: protocol v2 (replication and confirmatory tests)
+
+Protocol v2 was committed publicly (commit `f3d3e14`) before any MMIST-ccRCC value or new model result was examined.
+
+| Test | Pre-specified as | Result |
+|---|---|---|
+| C1: inversion in MMIST-ccRCC? | Confirmatory, with a fixed decision rule | **No inversion.** Recorded deaths agree 30/31 (CPTAC) and 169/169 (TCGA); 1 of 580 checkable labels contradicted |
+| C2: training-label effect on MMIST-LUNG, refit bootstrap | Confirmatory | **Confirmed.** ψ_B +0.049 (95% CI +0.008 to +0.091), one-sided p = 0.010, Holm p = 0.010 |
+| C3: training-label effect on MMIST-ccRCC | Confirmatory, if at least 20 contradictions | Not applicable (1 contradiction) |
+| S4: training-label effect, XGBoost / MLP | Secondary | XGBoost +0.051 (−0.002 to +0.093), borderline; MLP +0.028 (−0.093 to +0.101), inconclusive |
+
+**Exploratory findings in MMIST-ccRCC:**
+
+- **Forced outcomes:** 38 CPTAC patients (20.1%) have unknown 12-month status. 20 were labelled survivors and 18 were labelled deaths.
+- **The 18 deaths cannot be verified:** 17 have vital status "Not Reported" with no follow-up, 1 has a negative death time, and none appears in LinkedOmics.
+- **Shortcut:** all 18 patients with missing pathological stage are labelled deaths, and 4 of the 16 deaths in the released test set have missing stage.
+- **Metric inflation:** including unknown-status patients inflates released-label AUROC by 0.042 (0.010 to 0.078) and balanced accuracy by 0.040 (0.016 to 0.068) for logistic regression.
+
+**Revised verdict:** GO for submission as a short research article covering three resources, once the authors' declarations are completed and the MMIST authors have been contacted. The manuscript is in [`manuscript.md`](manuscript.md).
+
 ## 1. What was verified about the data
 
 | Item | Result |

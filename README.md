@@ -1,13 +1,14 @@
-# Survival Label Inconsistencies and Machine Learning Evaluation in Lung Cancer
+# Fixed-horizon survival labels in public multimodal cancer benchmarks
 
-**A source-linked reanalysis of the MMIST-LUNG benchmark: when one survival label means two opposite things.**
+**A source-linked audit of label provenance and its consequences for machine-learning evaluation: when one survival label means two opposite things.**
 
-**Omoding Isaac**¹, **Echodu Moses**², **Bob Tumushime**³, **Noah Okiror**⁴ and **Daniel Baguma**⁴
+**Omoding Isaac**¹, **Echodu Moses**², **Bob Tumushime**³, **Noah Okiror**⁴ and **Daniel Baguma**⁵
 
 ¹ Data Scientist, Ministry of Health · [omodingisaac111@gmail.com](mailto:omodingisaac111@gmail.com) · [GitHub](https://github.com/Isaac25-lgtm)  
 ² Co-investigator, Uganda Cancer Institute  
 ³ Data Scientist, Uganda Bureau of Statistics (UBOS)  
-⁴ Malaria Consortium
+⁴ Malaria Consortium  
+⁵ Malaria Consortium
 
 ![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12-3776ab)
 ![Licence](https://img.shields.io/badge/code%20licence-MIT-2a78d6)
@@ -20,7 +21,9 @@ MMIST-LUNG [[1]](#ref-1) is a public multimodal benchmark of 1,365 lung cancer p
 - **All 62 patients labelled as dying within a year were alive at day 365.** They died later.
 - **All 26 patients who died within a year were labelled as survivors.**
 
-We then measured what this does to model training, evaluation and comparison, separating those effects with paired designs on identical patients.
+We then measured what this does to model training, evaluation and comparison, separating those effects with paired designs on identical patients. Finally, under a protocol **committed publicly before the data were opened**, we replicated the audit on the sister benchmark MMIST-ccRCC [[23]](#ref-23) and used an independent resource, I3LUNG [[10]](#ref-10), as a negative control.
+
+![Stacked bars for five cohorts. MMIST-LUNG TCGA: 894 agree, 132 unknown labelled survivor. MMIST-LUNG CPTAC: 172 agree, 88 contradict, 79 unknown labelled survivor. MMIST-ccRCC TCGA: 429 agree. MMIST-ccRCC CPTAC: 150 agree, 1 contradicts, 20 unknown labelled survivor, 18 unknown labelled death. I3LUNG: 1,972 agree, 103 unknown left blank.](outputs/figures/readme/0_three_datasets.png)
 
 > **Read this first.** This audits a benchmark's labels. It is not a clinical tool and has not been peer reviewed. The authors' published results were not re-run, so nothing here says those numbers are wrong by a specific amount. "Source" means the upstream Genomic Data Commons (GDC) record, which is not adjudicated clinical truth. MMIST-LUNG is a valuable, openly shared resource, and that openness is what made this audit possible.
 
@@ -161,7 +164,7 @@ This is the mechanism. A model trained on released labels ranks CPTAC patients a
 
 ![Slope charts. Judged by source labels, moving from released-trained to source-trained improves AUROC from 0.600 to 0.649 for logistic regression and 0.604 to 0.657 for gradient boosting. Judged by released labels, AUROC falls from 0.637 to 0.564 and from 0.633 to 0.582.](outputs/figures/readme/5_wrong_winner.png)
 
-Training on source labels improves AUROC against those labels by about 0.05, and the gain appeared in all 50 CV repeats. Within CPTAC, repeated-CV AUROC rises from 0.56 to 0.73. Dropping patients with unknown status from training barely matters (−0.002), which points to the inversion rather than censoring as the driver.
+Training on source labels improves AUROC against those labels by about 0.05, and the gain appeared in all 50 CV repeats. **This was then confirmed as a pre-registered test** (protocol v2, C2): with both models refitted on every bootstrap replicate, the gain is +0.049 (95% CI +0.008 to +0.091; one-sided p = 0.010). The same test with the benchmark's own model families points the same way but is not resolved: XGBoost +0.051 (−0.002 to +0.093) and a multilayer perceptron +0.028 (−0.093 to +0.101). Within CPTAC, repeated-CV AUROC rises from 0.56 to 0.73. Dropping patients with unknown status from training barely matters (−0.002), which points to the inversion rather than censoring as the driver.
 
 Calibration tells the same story. Against source labels on $\mathcal{A}$, the released-trained logistic model has calibration slope 0.27 and scaled Brier score −0.014, so it does worse than predicting the event rate. The stage-only model has slope 1.01 and scaled Brier score +0.026. These are point estimates.
 
@@ -170,6 +173,24 @@ Calibration tells the same story. Against source labels on $\mathcal{A}$, the re
 ![Forest plot of the change in AUROC. The primary estimate is minus 0.034 with a 95% interval of minus 0.068 to minus 0.003. Excluding flagged records, a new fold split and CPTAC alone all have intervals that include zero.](outputs/figures/readme/6_primary_contrast.png)
 
 So the evidence does **not** support saying the released labels clearly inflate scores for a fixed model. Gradient boosting's interval also crosses zero (−0.021; −0.055 to +0.013). The stronger machine-learning results in steps 4 and 5 are post-hoc and need confirmation. Correcting the fold alignment moved the primary estimate from −0.042 to −0.034, which is a further reason for caution.
+
+### Step 7. Does it replicate? A sister benchmark and a negative control
+
+Protocol v2 was committed to this repository (commit `f3d3e14`) **before** any MMIST-ccRCC label value was examined. It fixed the rule in advance: "inversion replicated" if fewer than 10% of CPTAC recorded deaths agree with the source.
+
+- **No inversion in MMIST-ccRCC.** Recorded deaths agree 30 of 31 times in CPTAC and 169 of 169 in TCGA. Only 1 of 580 checkable labels contradicts the source. The inversion is specific to the MMIST-LUNG curation.
+- **A different failure mode: forced outcomes in both directions.** 38 CPTAC kidney patients (20.1%) have unknown 12-month status, despite the paper's 12-month follow-up criterion. 20 were labelled survivors. **18 were labelled deaths**: 17 have vital status "Not Reported" with no follow-up, and 1 has a negative death time. None appears in LinkedOmics. Of the benchmark's 75 death labels, 56 are confirmed, 18 are unverifiable and 1 is contradicted.
+- **The unverifiable deaths carry a shortcut (exploratory).** All 18 patients with pathological stage coded as missing are labelled deaths, so missingness alone predicts them. Four of the 16 death labels in the released test set have missing stage. Scoring the same out-of-fold predictions on all 618 patients instead of the 580 with known status inflates the benchmark's metrics:
+
+| Released-label model (5-fold CV) | All 618 | 580 with known status | Inflation (95% CI) |
+|---|---:|---:|---|
+| Logistic AUROC | 0.832 | 0.791 | +0.042 (0.010 to 0.078) |
+| Logistic balanced accuracy | 0.759 | 0.719 | +0.040 (0.016 to 0.068) |
+| Stage-only AUROC | 0.814 | 0.751 | +0.063 (0.036 to 0.099) |
+
+- **I3LUNG is clean.** Its 6-month and 24-month labels agree with its own time and event fields (1,972 of 1,972; 1,699 of 1,699), and censored patients are left blank.
+
+The audit therefore discriminates between resources: one inversion, one case of forced outcomes, one clean resource.
 
 ### Supporting experiments
 
@@ -202,7 +223,9 @@ So the evidence does **not** support saying the released labels clearly inflate 
 | Released label follows opposite-polarity rules by cohort | Exact reproduction of all 1,365 labels | **Deterministic** |
 | Unknown 12-month outcomes released as survivors | 211 patients, counted from source records | **Deterministic** |
 | Labels reverse the apparent cohort risk, and models learn it | Direct rates; mean predictions; pair decomposition | Strong, post-hoc |
-| Training on source labels improves true-label AUROC | +0.049 (95% CI 0.015 to 0.082), logistic | Moderate to strong, post-hoc |
+| Training on source labels improves true-label AUROC | +0.049 (95% CI 0.015 to 0.082), logistic, conditional bootstrap; **confirmed by refit bootstrap +0.049 (+0.008 to +0.091)** | **Confirmed**, pre-registered (v2) |
+| No label inversion in the sister benchmark MMIST-ccRCC | 199 of 200 recorded deaths agree | Pre-registered replication (v2) |
+| Unverifiable ccRCC deaths inflate benchmark metrics | AUROC +0.042 (0.010 to 0.078) | Moderate, exploratory |
 | Label set shifts the gap between the 15-feature and stage-only models | +0.060 (95% CI 0.026 to 0.098), logistic | Moderate, post-hoc |
 | Label set changes AUROC for fixed predictions | −0.034 (95% CI −0.068 to −0.003) | **Weak**, pre-specified |
 
@@ -217,7 +240,7 @@ So the evidence does **not** support saying the released labels clearly inflate 
 
 **Limitations:**
 
-- This is one benchmark. Nothing here generalises to lung cancer datasets at large.
+- Two benchmarks from one initiative and one independent resource were audited. That supports statements about these resources, not about how common such errors are.
 - Models are surrogates, so the published benchmark numbers are not re-estimated, and within-label model rankings are unresolved.
 - Source records share upstream submissions and are not adjudicated truth.
 - CPTAC has only 26 source early deaths, and its within-cohort contrast is inconclusive (+0.011; −0.206 to +0.140).
@@ -301,6 +324,7 @@ Requires Python 3.11 or 3.12. A full run takes about 15 minutes on a laptop CPU 
 | CPTAC-3 lung | Patient cohort, via GDC | As in GDC | 339 patients | Open-access clinical data | [[5]](#ref-5) [[6]](#ref-6) |
 | [TCGA-CDR](https://gdc.cancer.gov/about-data/publications/pancanatlas) | Alternative release for TCGA outcomes | Supplemental Table S1 | 1,026 of 1,026 TCGA | Public supplementary table | [[7]](#ref-7) |
 | [LinkedOmics CPTAC](https://www.linkedomics.org/) | Alternative release for CPTAC outcomes | Pan-cancer data freeze v1.2 | 218 of 339 CPTAC | Public download | [[8]](#ref-8) [[9]](#ref-9) |
+| [MMIST-ccRCC](https://multi-modal-ist.github.io/datasets/ccRCC/) | Replication benchmark (protocol v2) | Repo commit `c3f1a066` | 618 patients (TCGA-KIRC 429, CPTAC-CCRCC 189) | Public repository, GPL-3.0 | [[23]](#ref-23) [[24]](#ref-24) [[25]](#ref-25) |
 | [I3LUNG](https://doi.org/10.1038/s41591-026-04488-2) | Independent negative-control audit | Zenodo record 17535424 | 2,075 patients, separate population | **CC BY-NC 4.0** | [[10]](#ref-10) |
 | [cBioPortal](https://www.cbioportal.org/) | Downloaded as a cross-check; not used in reported results | API pull, hash in manifest | TCGA | Public API | n/a |
 
@@ -380,3 +404,10 @@ The views expressed are the authors' own and do not represent their institutions
 <a id="ref-21"></a>21. Kvamme H, Borgan Ø. The Brier Score under Administrative Censoring: Problems and Solutions. arXiv:1912.08581, 2019. <https://arxiv.org/abs/1912.08581>
 
 <a id="ref-22"></a>22. Collins GS, Moons KGM, Dhiman P, et al. TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods. *BMJ*. 2024;385:e078378. <https://doi.org/10.1136/bmj-2023-078378>
+
+
+<a id="ref-23"></a>23. Mota T, Verdelho MR, Bissoto A, Santiago C, Barata C. MMIST-ccRCC: A Real World Medical Dataset for the Development of Multi-Modal Systems. DCA in MI Workshop, CVPR 2024. arXiv:2405.01658. <https://arxiv.org/abs/2405.01658>
+
+<a id="ref-24"></a>24. The Cancer Genome Atlas Research Network. Comprehensive molecular characterization of clear cell renal cell carcinoma. *Nature*. 2013;499(7456):43-49. <https://doi.org/10.1038/nature12222>
+
+<a id="ref-25"></a>25. Clark DJ, Dhanasekaran SM, Petralia F, et al. Integrated Proteogenomic Characterization of Clear Cell Renal Cell Carcinoma. *Cell*. 2019;179(4):964-983.e31. <https://doi.org/10.1016/j.cell.2019.10.007>

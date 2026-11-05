@@ -20,6 +20,7 @@ joblib==1.6.0
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
 kiwisolver==1.5.1
+lxml==6.1.3
 MarkupSafe==3.0.4
 matplotlib==3.10.5
 narwhals==2.28.0
@@ -37,6 +38,7 @@ pydeck==0.9.3
 pyparsing==3.3.3
 pytest==8.3.4
 python-dateutil==4.0.0
+python-docx==1.1.2
 pytz==2026.6
 PyYAML==6.0.2
 referencing==0.37.0
@@ -55,3 +57,4 @@ typing_extensions==4.16.0
 tzdata==2026.6
 urllib3==2.8.0
 watchdog==6.0.0
+xgboost @ file:///F:/MY%20FILES/DATA%20SCIENCE/PUBLISHING/CANCER/lung-cancer-ml-survival-audit/data/interim/whl/xgboost-2.1.3-py3-none-win_amd64.whl#sha256=25c0ffcbd62aac5bc22c79e08b5b2edad1d5e37f16610ebefa5f06f3e2ea3d96
