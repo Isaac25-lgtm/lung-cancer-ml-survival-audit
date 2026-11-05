@@ -59,7 +59,7 @@ st.markdown(
     '<span class="badge b-warn">Benchmark label audit</span>'
     '<span class="badge b-info">Source-linked: GDC Data Release 46.0</span>'
     '<span class="badge b-ok">Not a clinical tool</span>', unsafe_allow_html=True)
-st.caption("Omoding Isaac, Data Scientist")
+st.caption("Omoding Isaac (Ministry of Health) and Bob Tumushime (Uganda Bureau of Statistics)")
 st.caption(f"Run {str(R.get('run_utc', '?'))[:16].replace('T', ' ')} UTC · code commit {R.get('git_commit', 'uncommitted')} · "
            f"protocol v{R.get('protocol_version')} · aggregate tables only, no patient-level data")
 

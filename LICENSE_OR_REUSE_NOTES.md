@@ -24,7 +24,7 @@ Patient identifiers (TCGA barcodes, CPTAC case IDs) are public, de-identified pr
 ### Ethics
 
 - This is secondary analysis of public, de-identified, open-access data.
-- Whether institutional ethics review or a formal exemption is needed depends on the author's institution and the target journal. Isaac should confirm this with their institution before submission.
+- Whether institutional ethics review or a formal exemption is needed depends on the authors' institutions and the target journal. Isaac should confirm this with their institution before submission.
 - No data from Uganda Cancer Institute or any other institution were requested or used.
 
 ### Disclosure

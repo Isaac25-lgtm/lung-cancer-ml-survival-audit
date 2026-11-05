@@ -1,6 +1,6 @@
 # Findings report
 
-**Author:** Omoding Isaac, Data Scientist
+**Authors:** Omoding Isaac (Data Scientist, Ministry of Health) and Bob Tumushime (Data Scientist, Uganda Bureau of Statistics)
 
 **Working title:** *Survival Label Inconsistencies and Machine Learning Evaluation in Lung Cancer: A Source-Linked Reanalysis of the MMIST-LUNG Benchmark*
 

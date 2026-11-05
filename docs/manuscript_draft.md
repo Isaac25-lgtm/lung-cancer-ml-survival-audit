@@ -2,7 +2,11 @@
 
 Written for a short communication or benchmark-audit article. Every number traces to `outputs/tables/`. Author roles, ethics statement and venue formatting are left for real collaborators to complete.
 
-**Author:** Omoding Isaac, Data Scientist (omodingisaac111@gmail.com). Add any collaborators, affiliations and contributor roles before submission.
+**Authors:** Omoding Isaac¹ (corresponding, omodingisaac111@gmail.com) and Bob Tumushime².
+
+¹ Data Scientist, Ministry of Health. ² Data Scientist, Uganda Bureau of Statistics (UBOS).
+
+Add contributor roles (CRediT), any further collaborators, and a statement that the views are the authors' own before submission.
 
 **Title:** Survival Label Inconsistencies and Machine Learning Evaluation in Lung Cancer: A Source-Linked Reanalysis of the MMIST-LUNG Benchmark
 

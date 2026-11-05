@@ -129,4 +129,5 @@ def test_every_reference_is_cited_and_defined():
 
 def test_author_details_present():
     assert "Omoding Isaac" in README and "omodingisaac111@gmail.com" in README
+    assert "Bob Tumushime" in README and "Uganda Bureau of Statistics" in README
     assert "Isaac Omoding" not in README
