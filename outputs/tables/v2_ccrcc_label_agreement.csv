@@ -1,0 +1,8 @@
+cohort,released,source_state,n
+CPTAC,released early death,alive >365d,1
+CPTAC,released early death,early death,10
+CPTAC,released early death,unknown,18
+CPTAC,released survivor,alive >365d,140
+CPTAC,released survivor,unknown,20
+TCGA,released early death,early death,46
+TCGA,released survivor,alive >365d,383

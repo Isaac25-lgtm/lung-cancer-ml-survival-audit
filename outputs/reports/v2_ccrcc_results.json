@@ -1,0 +1,16 @@
+{
+  "info": {
+    "gdc_release": "Data Release 46.0 - August 10, 2026",
+    "n": 618,
+    "gdc_linked": 618,
+    "released_mean_vital_status_12": 0.8786407766990292,
+    "orientation_1_is_survivor": true,
+    "projects": {
+      "TCGA-KIRC": 429,
+      "CPTAC-3": 189
+    },
+    "cohort_prefix_matches_project": 618
+  },
+  "C1_decision": "no inversion",
+  "C3_applicable": false
+}

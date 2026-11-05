@@ -1,0 +1,4 @@
+split,patients,released_deaths,deaths_confirmed,deaths_unverifiable,deaths_contradicted,stage_missing,stage_missing_labelled_death,deaths_with_stage_missing
+all,618,75,56,18,1,18,18,18
+test,121,16,11,5,0,4,4,4
+train,497,59,45,13,1,14,14,14

@@ -45,11 +45,16 @@ def make_model(kind: str, features: list[str], allow_leakage: bool = False, seed
     check_features(features, allow_leakage)
     if kind == "prevalence":
         return Pipeline([("clf", DummyClassifier(strategy="prior"))])
+    if kind == "xgb":
+        from xgboost import XGBClassifier
+        # Used without a Pipeline wrapper: xgboost 2.1 is incompatible with sklearn 1.6 Pipeline tags.
+        return XGBClassifier(n_estimators=300, max_depth=3, learning_rate=0.05, subsample=0.8, random_state=seed,
+                             n_jobs=2, eval_metric="logloss", verbosity=0)
     if kind == "hgb":
         return Pipeline([("clf", HistGradientBoostingClassifier(
             max_iter=200, learning_rate=0.05, max_leaf_nodes=15, min_samples_leaf=20,
             l2_regularization=1.0, random_state=seed))])
-    if kind in {"logistic", "stage_only"}:
+    if kind in {"logistic", "stage_only", "mlp"}:
         ords = [c for c in features if c not in NOMINAL]
         noms = [c for c in features if c in NOMINAL]
         if kind == "stage_only":
@@ -63,8 +68,13 @@ def make_model(kind: str, features: list[str], allow_leakage: bool = False, seed
             transformers.append(("nom", Pipeline([
                 ("str", FunctionTransformer(_nominal_to_str)),
                 ("oh", OneHotEncoder(handle_unknown="ignore", sparse_output=False))]), noms))
-        return Pipeline([("pre", ColumnTransformer(transformers)),
-                         ("clf", LogisticRegression(C=1.0, max_iter=5000))])
+        if kind == "mlp":
+            from sklearn.neural_network import MLPClassifier
+            clf = MLPClassifier(hidden_layer_sizes=(64,), alpha=1e-3, early_stopping=True, max_iter=500,
+                                random_state=seed)
+        else:
+            clf = LogisticRegression(C=1.0, max_iter=5000)
+        return Pipeline([("pre", ColumnTransformer(transformers)), ("clf", clf)])
     raise ValueError(kind)
 
 

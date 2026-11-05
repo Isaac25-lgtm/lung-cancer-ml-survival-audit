@@ -231,8 +231,67 @@ def primary_contrast():
     _save(fig, "6_primary_contrast")
 
 
+def three_datasets():
+    """Label integrity across the three audited resources (MMIST-LUNG, MMIST-ccRCC, I3LUNG)."""
+    rows = []
+    a = t("label_agreement")
+    a = a[a.source == "gdc_gt"]
+    for cohort in ["TCGA", "CPTAC"]:
+        x = a[a.cohort == cohort]
+        ok = x[((x.released == "released early death") & (x.source_state == "early death")) |
+               ((x.released == "released survivor") & (x.source_state == "alive >365d"))].n.sum()
+        unk_s = x[(x.source_state == "unknown") & (x.released == "released survivor")].n.sum()
+        unk_d = x[(x.source_state == "unknown") & (x.released == "released early death")].n.sum()
+        rows.append((f"MMIST-LUNG  {cohort}", ok, x.n.sum() - ok - unk_s - unk_d, unk_s, unk_d, 0))
+    p = TABLES / "v2_ccrcc_label_agreement.csv"
+    if p.exists():
+        c = pd.read_csv(p)
+        for cohort, lab in [("TCGA", "TCGA-KIRC"), ("CPTAC", "CPTAC-CCRCC")]:
+            x = c[c.cohort == cohort]
+            ok = x[((x.released == "released early death") & (x.source_state == "early death")) |
+                   ((x.released == "released survivor") & (x.source_state == "alive >365d"))].n.sum()
+            unk_s = x[(x.source_state == "unknown") & (x.released == "released survivor")].n.sum()
+            unk_d = x[(x.source_state == "unknown") & (x.released == "released early death")].n.sum()
+            rows.append((f"MMIST-ccRCC  {lab.split('-')[0]}", ok, x.n.sum() - ok - unk_s - unk_d, unk_s, unk_d, 0))
+    i3 = t("i3lung_label_audit")
+    agree = i3[(i3.label == "OS_6") & i3.check.str.contains("1 = alive")].value.iloc[0]
+    k, n = (int(v) for v in agree.split("/"))
+    miss = int(i3[(i3.label == "OS_6") & (i3.check == "label missing")].value.iloc[0])
+    rows.append(("I3LUNG  (6-month)", k, n - k, 0, 0, miss))
+    cols = [("agrees with source", BLUE), ("contradicts source", RED), ("unknown, labelled survivor", GRAY),
+            ("unknown, labelled death", ORANGE), ("unknown, left blank", LIGHT)]
+    fig, ax = plt.subplots(figsize=(9.2, 3.9))
+    for i, r in enumerate(rows):
+        tot = sum(r[1:])
+        left = 0.0
+        for j, (name, col) in enumerate(cols):
+            v = r[1 + j]
+            w = v / tot
+            if v:
+                ax.barh(i, w - 0.003, left=left, color=col, height=0.66, lw=0)
+                if w > 0.045:
+                    ax.text(left + w / 2, i, f"{v:,}", ha="center", va="center", fontsize=9,
+                            color=INK if col == LIGHT else "white", fontweight="bold")
+            left += w
+        ax.text(1.01, i, f"n = {tot:,}", va="center", fontsize=9, color=INK2)
+    ax.set_yticks(range(len(rows)), [r[0] for r in rows], fontsize=10)
+    ax.tick_params(axis="y", length=0)
+    ax.invert_yaxis()
+    ax.set_xlim(0, 1.08)
+    ax.xaxis.set_visible(False)
+    for sp in ax.spines.values():
+        sp.set_visible(False)
+    handles = [plt.Rectangle((0, 0), 1, 1, color=c) for _, c in cols]
+    fig.legend(handles, [n for n, _ in cols], loc="lower left", ncol=3, fontsize=8.8, bbox_to_anchor=(0.012, -0.07),
+               handlelength=1, columnspacing=1.2)
+    _header(fig, "Three resources, three different label stories",
+            "Released label vs 12-month status in GDC (MMIST datasets) or vs the dataset's own time and event fields (I3LUNG)", top=0.80)
+    fig.subplots_adjust(left=0.20, bottom=0.14)
+    _save(fig, "0_three_datasets")
+
+
 def run() -> None:
-    for f in [label_composition, opposite_rules, hidden_in_average, cohort_flip, wrong_winner, primary_contrast]:
+    for f in [three_datasets, label_composition, opposite_rules, hidden_in_average, cohort_flip, wrong_winner, primary_contrast]:
         f()
 
 

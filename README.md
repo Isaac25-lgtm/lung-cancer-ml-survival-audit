@@ -2,10 +2,12 @@
 
 **A source-linked reanalysis of the MMIST-LUNG benchmark: when one survival label means two opposite things.**
 
-**Omoding Isaac**¹ and **Bob Tumushime**²
+**Omoding Isaac**¹, **Echodu Moses**², **Bob Tumushime**³, **Noah Okiror**⁴ and **Daniel Baguma**⁴
 
 ¹ Data Scientist, Ministry of Health · [omodingisaac111@gmail.com](mailto:omodingisaac111@gmail.com) · [GitHub](https://github.com/Isaac25-lgtm)  
-² Data Scientist, Uganda Bureau of Statistics (UBOS)
+² Co-investigator, Uganda Cancer Institute  
+³ Data Scientist, Uganda Bureau of Statistics (UBOS)  
+⁴ Malaria Consortium
 
 ![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12-3776ab)
 ![Licence](https://img.shields.io/badge/code%20licence-MIT-2a78d6)
@@ -326,9 +328,12 @@ Code is released under the [MIT licence](LICENSE). The licence does not cover th
 | Author | Role and affiliation | Contact |
 |---|---|---|
 | **Omoding Isaac** (corresponding author) | Data Scientist, Ministry of Health | [omodingisaac111@gmail.com](mailto:omodingisaac111@gmail.com) · [GitHub](https://github.com/Isaac25-lgtm) |
+| **Echodu Moses** (co-investigator) | Uganda Cancer Institute | |
 | **Bob Tumushime** | Data Scientist, Uganda Bureau of Statistics (UBOS) | |
+| **Noah Okiror** | Malaria Consortium | |
+| **Daniel Baguma** | Malaria Consortium | |
 
-The views expressed are the authors' own and do not represent their institutions. Contribution roles (CRediT) will be added before submission.
+The views expressed are the authors' own and do not represent their institutions. No data from Uganda Cancer Institute or any other institution were used; all data are public. Contribution roles (CRediT) will be added before submission.
 
 ## 11. References
 

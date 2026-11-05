@@ -2,7 +2,7 @@
 
 **Frozen:** 2026-11-05, and committed to the public repository **before** any MMIST-ccRCC label value, ccRCC source record or new model result was examined. The commit timestamp is the record.
 
-**Authors:** Omoding Isaac, Bob Tumushime.
+**Authors:** Omoding Isaac, Echodu Moses, Bob Tumushime, Noah Okiror, Daniel Baguma. (Author list updated after freezing; the analysis plan is unchanged.)
 
 ## Why v2 exists
 

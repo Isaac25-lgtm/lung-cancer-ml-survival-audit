@@ -2,9 +2,9 @@
 
 Written for a short communication or benchmark-audit article. Every number traces to `outputs/tables/`. Author roles, ethics statement and venue formatting are left for real collaborators to complete.
 
-**Authors:** Omoding Isaac¹ (corresponding, omodingisaac111@gmail.com) and Bob Tumushime².
+**Authors:** Omoding Isaac¹ (corresponding, omodingisaac111@gmail.com), Echodu Moses², Bob Tumushime³, Noah Okiror⁴ and Daniel Baguma⁴.
 
-¹ Data Scientist, Ministry of Health. ² Data Scientist, Uganda Bureau of Statistics (UBOS).
+¹ Data Scientist, Ministry of Health. ² Co-investigator, Uganda Cancer Institute. ³ Data Scientist, Uganda Bureau of Statistics (UBOS). ⁴ Malaria Consortium.
 
 Add contributor roles (CRediT), any further collaborators, and a statement that the views are the authors' own before submission.
 

@@ -70,9 +70,9 @@ def load_linkedomics() -> pd.DataFrame:
     return s
 
 
-def load_gdc() -> tuple[pd.DataFrame, str]:
+def load_gdc(fname: str = "cases_mmist.json") -> tuple[pd.DataFrame, str]:
     """Flatten GDC case records to one row per patient."""
-    raw = json.loads((GDC / "cases_mmist.json").read_text())
+    raw = json.loads((GDC / fname).read_text())
     rows = []
     for h in raw["hits"]:
         dm = h.get("demographic") or {}

@@ -1,0 +1,4 @@
+cohort,n,ascertainable,unknown,unknown_released_survivor,source_early_deaths,released_early_deaths,inconsistent,inconsistent_pct,inconsistent_ci_lo,inconsistent_ci_hi,recorded_deaths_ascertainable,recorded_deaths_label_agrees,recorded_deaths_agree_pct,recorded_deaths_agree_ci_lo,recorded_deaths_agree_ci_hi,rule_tcga_reproduces,rule_notebook_reproduces
+All,618,580,38,20,56,75,1,0.1724137931034483,0.030441754316943345,0.9700796599199514,200,199,99.5,97.22262956021069,99.91168312843989,600,401
+CPTAC,189,151,38,20,10,29,1,0.6622516556291391,0.11699949278556852,3.6555423478712767,31,30,96.7741935483871,83.8058948352751,99.42827784745832,171,141
+TCGA,429,429,0,0,46,46,0,0.0,0.0,0.8874978915283301,169,169,100.0,97.77746679129847,100.0,429,260

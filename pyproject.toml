@@ -2,7 +2,7 @@
 name = "lung-cancer-ml-survival-audit"
 version = "1.0.0"
 description = "Source-linked audit of 12-month survival labels in the MMIST-LUNG benchmark and their effect on ML evaluation"
-authors = [{ name = "Omoding Isaac", email = "omodingisaac111@gmail.com" }, { name = "Bob Tumushime" }]
+authors = [{ name = "Omoding Isaac", email = "omodingisaac111@gmail.com" }, { name = "Echodu Moses" }, { name = "Bob Tumushime" }, { name = "Noah Okiror" }, { name = "Daniel Baguma" }]
 requires-python = ">=3.11,<3.13"
 license = { text = "MIT (code only; see LICENSE_OR_REUSE_NOTES.md for data)" }
 dependencies = [

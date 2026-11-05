@@ -31,6 +31,10 @@
  "sample_flow.csv": "6ad2a04c355c4ad6b115a98b37259a23a5bbd52f30fdbfc40713d233a9c9b9a3",
  "score_distribution_by_label_category.csv": "68adb2922b7e4db3ed6b13e30c67abd0a01fd2bf6f70b12a190cc7675f9e0b31",
  "score_summary_by_label_category.csv": "c7cf43e631a2f4901619e189a5a68b9096c5b1a0370194f367222929143a1e6c",
- "source_manifest.csv": "0f2d8719121f42f1f1c9a79819aa3b782a9cae28e2f0c7b552d5dcd907d52a9b",
- "unknown_reasons.csv": "7e2f1f1cf7e3899bce6e26ac79b3eaf1739d0944f012f88763f892cded3896c9"
+ "source_manifest.csv": "797ead636c6e6a78eeb9bf2ddaaaa32ac8a6c17c941219e9c517ca9f8da3c28f",
+ "unknown_reasons.csv": "7e2f1f1cf7e3899bce6e26ac79b3eaf1739d0944f012f88763f892cded3896c9",
+ "v2_ccrcc_c1_label_audit.csv": "9106f0fbdd3364ce1b5552a59dfaf67603c3af991aadef8a540ff3869ca88bab",
+ "v2_ccrcc_exploratory_metrics.csv": "37d7f43eaf9f0f1328ba012f52f923c9abaf6729611d87b24b8d7cc3a4e78c11",
+ "v2_ccrcc_label_agreement.csv": "cc5079ca0574a50baa4ad20a52b60b402585dfb771dcd384e2f2cc7e38c57e1f",
+ "v2_ccrcc_shortcut.csv": "7c00df28280b9a365e289abaffc5ab44746ae06bbd498f125cca2c3d4317b6ca"
 }
